@@ -1,0 +1,45 @@
+<div class="body">
+
+  <div class="container">
+
+
+    <form class="card" [formGroup]="loginForm" (ngSubmit)="submit()" [ngClass]="{'container-warning' : auth.error$ | async}">
+      <h2>АВТОРИЗАЦИЯ</h2>
+      <div class="alert alert-warning" *ngIf="auth.error$ | async as error">
+        {{error}}
+      </div>
+      <div class="form-control">
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email">
+        <div
+          *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
+          class="alert-warning"
+        >
+          <small *ngIf="loginForm.get('email').errors.required">Поле не может быть пустым</small>
+          <small *ngIf="loginForm.get('email').errors.email">Введите корректный email</small>
+        </div>
+      </div>
+      <div class="form-control">
+        <label for="password">Пароль:</label>
+        <input id="password" type="password" formControlName="password">
+        <div
+          *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"
+          class="alert-warning"
+        >
+          <small *ngIf="loginForm.get('password').errors.required">
+            Поле не может быть пустым
+          </small>
+          <small *ngIf="loginForm.get('password').errors.minlength">
+            Веедите пароль не менее {{loginForm.get('password').errors.minlength.requiredLength}} сиимволов
+          </small>
+        </div>
+      </div>
+
+      <button
+        class="btn"
+        type="submit"
+        [disabled]="loginForm.invalid || isSubmit">Вход
+      </button>
+    </form>
+  </div>
+</div>
