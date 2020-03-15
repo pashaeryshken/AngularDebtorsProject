@@ -1,6 +1,6 @@
 <header>
   <div class="logo">
-    <img src="../../../../assets/logo.png" alt="">
+    <img src="../../assets/logo.png" alt="">
     <p>DEBTORS</p>
   </div>
   <nav>
@@ -13,9 +13,15 @@
     </a>
 
     <ng-template #loginBlock>
-      <a href="#">ВХОД</a>
+      <a
+        href="#"
+        (click)="openLoginPage($event)"
+      >ВХОД</a>
       <strong>/</strong>
-      <a href="#">РЕГИСТРАЦИЯ</a>
+      <a
+        href="#"
+        (click)="openSignPage($event)"
+      >РЕГИСТРАЦИЯ</a>
     </ng-template>
   </nav>
 </header>

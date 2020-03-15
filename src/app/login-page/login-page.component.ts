@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../shared/interfaces';
-import {AuthServices} from '../shared/services/auth.services';
+import {AuthService} from '../shared/services/auth.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
   isSubmit = false;
 
-  constructor(public auth: AuthServices, private router: Router) {
+  constructor(public auth: AuthService, private router: Router) {
   }
 
 

@@ -33,19 +33,20 @@ header{
 
 }
 
+
+
 .body{
   height: 89%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .container{
+  margin: auto 0;
   min-width: 500px;
 }
 
 .card{
-  margin-top: 15px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   padding: 20px;
@@ -69,10 +70,16 @@ header{
   }
 }
 
+.form-title{
+  font-size: 30px;
+  text-align: center;
+  color: #7f7f7f;
+}
+
 .btn{
   border: 1px solid #7bc1ec;
   background-color: #7295ec;
-  width: 100px;
+  min-width: 100px;
   height: 30px;
   color: #fff;
   font-size: 15px;

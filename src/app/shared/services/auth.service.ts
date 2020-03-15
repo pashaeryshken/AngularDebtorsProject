@@ -4,8 +4,10 @@ import {AuthResponse, User} from '../interfaces';
 import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
-@Injectable()
-export class AuthServices {
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
 
   public error$: Subject<string> = new Subject<string>();
   isRefreshToken = true;
@@ -14,6 +16,23 @@ export class AuthServices {
   }
 
   get token(): string {
+    return localStorage.getItem('token');
+  }
+
+  login(user: User): Observable<AuthResponse> {
+    user.email = user.email.trim();
+    return this.http.post<AuthResponse>('http://localhost:3333/users/login', user)
+      .pipe(
+        tap(this.setToken),
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  logout() {
+    this.setToken(null);
+  }
+
+  isAuthenticated(): boolean {
     const expDate = new Date(localStorage.getItem('token-exp'));
     const refreshToken = new Date(localStorage.getItem('token-refresh'));
     if (new Date() > refreshToken) {
@@ -28,22 +47,6 @@ export class AuthServices {
         });
       }
     }
-    return localStorage.getItem('token');
-  }
-
-  login(user: User): Observable<any> {
-    return this.http.post('http://localhost:3333/users/login', user)
-      .pipe(
-        tap(this.setToken),
-        catchError(this.handleError.bind(this))
-      );
-  }
-
-  logout() {
-    this.setToken(null);
-  }
-
-  isAuthenticated(): boolean {
     return !!this.token;
   }
 
@@ -54,10 +57,10 @@ export class AuthServices {
     return throwError(error);
   }
 
-  private refreshToken(): Observable<any> {
+  private refreshToken(): Observable<AuthResponse> {
     console.log('refreshToken');
     const token = localStorage.getItem('token');
-    return this.http.get('http://localhost:3333/users/refresh-token', {
+    return this.http.get<AuthResponse>('http://localhost:3333/users/refresh-token', {
       headers: {
         token
       }
@@ -67,9 +70,9 @@ export class AuthServices {
     );
   }
 
-  private setToken(response: AuthResponse | null) {
+  public setToken(response: AuthResponse | null) {
     if (response) {
-      const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
+      const expDate = new Date(new Date().getTime() + (+response.expiresIn) * 1000);
       const refreshTokenDate = new Date(new Date().getTime() + (+response.expiresIn - 600) * 1000);
       localStorage.setItem('token', response.token);
       localStorage.setItem('token-exp', expDate.toString());
@@ -77,5 +80,14 @@ export class AuthServices {
     } else {
       localStorage.clear();
     }
+  }
+
+  public userData() {
+    const token = localStorage.getItem('token');
+    return this.http.get('http://localhost:3333/users/', {
+      headers: {
+        token
+      }
+    });
   }
 }

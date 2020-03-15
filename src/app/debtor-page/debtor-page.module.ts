@@ -12,7 +12,6 @@ import {ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule
   ],
   exports: [
-    DebtorPageComponent
   ]
 })
 export class DebtorPageModule {}

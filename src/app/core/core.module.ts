@@ -3,10 +3,10 @@ import {SharedModule} from '../shared/shared.module';
 import {CommonModule} from '@angular/common';
 import {LoginModule} from '../login-page/login.module';
 import {HttpClientModule} from '@angular/common/http';
-import {MainLayoutModule} from '../shared/components/main-layout/main-layout.module';
-import {AppRoutingModule} from '../app-routing.module';
+import {MainLayoutModule} from '../main-layout/main-layout.module';
 import {DebtorPageModule} from '../debtor-page/debtor-page.module';
 import {DebtorsListPageModule} from '../debtors-list-page/debtors-list-page.module';
+import {SignPageModule} from '../sign-page/sign-page.module';
 
 @NgModule({
   declarations: [],
@@ -14,18 +14,18 @@ import {DebtorsListPageModule} from '../debtors-list-page/debtors-list-page.modu
     CommonModule,
     SharedModule,
     LoginModule,
-    AppRoutingModule,
     MainLayoutModule,
     HttpClientModule,
     DebtorPageModule,
-    DebtorsListPageModule
+    DebtorsListPageModule,
+    SignPageModule
   ],
   exports: [
     LoginModule,
     MainLayoutModule,
-    AppRoutingModule,
     DebtorPageModule,
-    DebtorsListPageModule
+    DebtorsListPageModule,
+    SignPageModule
   ],
 })
 export class CoreModule {}

@@ -1,0 +1,83 @@
+<div class="body">
+
+  <div class="container">
+
+
+    <form class="card" [formGroup]="signForm" (ngSubmit)="submit()">
+      <h2 class="form-title">РЕГИСТРАЦИЯ</h2>
+      <!--  <div class="alert alert-warning">
+        </div>-->
+
+      <div class="form-control">
+        <label for="user-name">Имя:</label>
+        <input id="user-name" type="text" formControlName="userName">
+        <div
+          *ngIf="signForm.get('userName').errors && signForm.get('userName').touched"
+          class="alert-warning"
+        >
+          <small *ngIf="signForm.get('userName').errors.required">
+            Поле не может быть пустым
+          </small>
+          <small *ngIf="signForm.get('userName').errors.minlength">
+            Введите имя не менее {{signForm.get('userName').errors.minlength.requiredLength}} символов
+          </small>
+        </div>
+      </div>
+
+
+      <div class="form-control">
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email">
+        <div
+          *ngIf="signForm.get('email').errors && signForm.get('email').touched"
+          class="alert-warning"
+        >
+          <small *ngIf="signForm.get('email').errors.required">
+            Поле не может быть пустым
+          </small>
+          <small *ngIf="signForm.get('email').errors.email">Введите корректный email</small>
+        </div>
+      </div>
+        <div class="form-control">
+          <label for="password">Пароль:</label>
+          <input id="password" type="password" formControlName="pass">
+          <div
+            *ngIf="signForm.get('pass').errors && signForm.get('pass').touched"
+            class="alert-warning"
+          >
+            <small *ngIf="signForm.get('pass').errors.required">
+              Поле не может быть пустым
+            </small>
+            <small *ngIf="signForm.get('pass').errors.minlength">
+              Веедите пароль не менее {{signForm.get('pass').errors.minlength.requiredLength}} сиимволов
+            </small>
+          </div>
+        </div>
+        <div class="form-control">
+          <label for="confirm-password">Подтверждение пароля:</label>
+          <input id="confirm-password" type="password" formControlName="conf_pass">
+          <div
+            *ngIf="signForm.get('conf_pass').errors
+            && signForm.get('conf_pass').touched"
+            class="alert-warning"
+          >
+            <small *ngIf="signForm.get('conf_pass').errors.required">
+              Поле не может быть пустым.
+            </small>
+            <small *ngIf="signForm.get('conf_pass').errors.minlength">
+              Введите пароль не менее {{signForm.get('conf_pass').errors.minlength.requiredLength}}
+              сиимволов.
+            </small>
+            <small *ngIf="signForm.get('conf_pass').errors.custom">
+              Пароли не совпадают
+            </small>
+          </div>
+        </div>
+      <button
+        class="btn"
+        type="submit"
+      >Подтвердить
+      </button>
+    </form>
+  </div>
+</div>
