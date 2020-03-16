@@ -1,16 +1,8 @@
-.logo {
-  display: flex;
-  align-items: center;
-  font-size: 36px;
-  font-weight: 600;
-  img {
-    width: 30px;
-  }
-}
 
 a{
   font-weight: 600;
   color: #7f7f7f;
+  text-decoration: none;
 
   &:hover{
     color: #7295ec;
@@ -23,3 +15,9 @@ nav{
     margin: 0 5px;
   }
 }
+
+.navbar{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+

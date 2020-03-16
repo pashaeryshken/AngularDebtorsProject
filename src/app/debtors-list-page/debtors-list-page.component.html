@@ -1,47 +1,80 @@
-<div class="body">
-
-  <section class="container">
-
-    <div class="search-bar">asdf</div>
+<div class="container col-md-12 mt-3" align="center">
 
 
-    <div class="content">
-      <div class="debtor">
-        <div class="photo">
-          <img
-            src="https://bipbap.ru/wp-content/uploads/2017/11/Krutye-kartinki-na-avu-dlya-patsanov-klassnye-foto-i-kartinki-na-avu-16.jpg"
-            alt=""/>
-        </div>
-        <div class="people-info">
-          <a href="#">Павел Ерюшкин</a>
 
-          <div class="mobile">
-            <p>Номер телефона: +375 (33) 688 66 24</p>
-            <p>Адресс: Калиновая д.15</p>
-          </div>
-          <div class="date-payment">
-            <small>Дата возврата: 20-03-2020</small>
-          </div>
-        </div>
-        <div class="amount-info">
-          <div class="amount">
-            <p>2000</p>
-            <p>BYN</p>
-          </div>
-          <button>Вернул</button>
+
+
+  <div class="card mb-3 p-2" style="max-width: 700px;" *ngFor="let debtor of debtorsArr ">
+    <div class="row no-gutters">
+      <div class="col-md-3">
+        <img src="https://bipbap.ru/wp-content/uploads/2017/11/Krutye-kartinki-na-avu-dlya-patsanov-klassnye-foto-i-kartinki-na-avu-16.jpg" class="card-img" alt="...">
+      </div>
+      <div class="col-md-7">
+        <div class="card-body" align="left">
+          <h5 class="card-title">{{debtor.name}}</h5>
+          <p class="card-text">
+            Номер телефона: +375 (33) 688 66 24 <br>
+            Email: pashaeryshken@mai.ru
+          </p>
+          <p class="card-text"><small class="text-muted">Дата возврата: {{debtor.dateOfPayment | date}}</small></p>
         </div>
       </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-primary mt-3" *ngIf="debtor.status === 1" (click)="editStatus(debtor._id)">
+          {{debtor.amount}} <span class="badge badge-light">{{debtor.currency}}</span>
+        </button>
 
+        <button type="button" class="btn btn-success mt-3" disabled *ngIf="debtor.status === 2">
+          Вернули
+        </button>
 
-      <div class="debtor">asdasd</div>
-      <div class="debtor">asdasd</div>
+        <div>
+        <small class="text-muted" *ngIf="debtor.isI">Вы должны</small>
+        <small class="text-muted" *ngIf="!debtor.isI">Вам должны</small>
+        </div>
+
+        <button type="button" class="btn btn-danger mt-3" (click)="debtorRemove(debtor._id)">
+          Удалить
+        </button>
+      </div>
     </div>
+  </div>
 
-  </section>
 
-  <a class="btn-create">
+
+  <button type="button" class="btn btn-outline-primary btn-create">
     <p>+</p>
-  </a>
-
+  </button>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

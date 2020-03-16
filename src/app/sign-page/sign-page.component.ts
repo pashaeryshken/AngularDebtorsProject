@@ -57,7 +57,7 @@ export class SignPageComponent implements OnInit {
         const signData: SignData = {
           userName: this.signForm.value.userName,
           email: this.signForm.value.email,
-          password: this.signForm.value.password
+          password: this.signForm.value.pass
         };
         this.sign.sign(signData).subscribe(() => {
           this.signForm.reset();

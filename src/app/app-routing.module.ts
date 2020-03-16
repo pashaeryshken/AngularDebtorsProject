@@ -6,6 +6,7 @@ import {DebtorPageComponent} from './debtor-page/debtor-page.component';
 import {DebtorsListPageComponent} from './debtors-list-page/debtors-list-page.component';
 import {AuthGuard} from './shared/services/auth.guard';
 import {SignPageComponent} from './sign-page/sign-page.component';
+import {CreateDebtorPageComponent} from './create-debtor-page/create-debtor-page.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
       {path: '', redirectTo: '/login', pathMatch: 'full'},
       {path: 'login', component: LoginPageComponent},
       {path: 'sign', component: SignPageComponent},
-      {path: 'debtors', component: DebtorsListPageComponent, canActivate: [AuthGuard]},
+      {path: 'debtors', component: DebtorsListPageComponent,/* canActivate: [AuthGuard]*/},
+      {path: 'create', component: CreateDebtorPageComponent},
       {path: 'debtors/:id', component: DebtorPageComponent, canActivate: [AuthGuard]}
     ]
   }

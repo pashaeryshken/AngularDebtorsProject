@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center col-md-12">
+    <form class="needs-validation col-md-6" novalidate >
+      <div class="form-row">
+        <div class="col-md-12 mb-3">
+          <label for="validationTooltip01">Имя</label>
+          <input type="text" class="form-control" id="validationTooltip01">
+          <div class="valid-tooltip">
+            Looks good!
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label>Адрес</label>
+          <input type="text" class="form-control">
+
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Телефон</label>
+          <input type="text" class="form-control">
+
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label>Дата начала</label>
+          <input type="date" class="form-control">
+
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Дата возврата</label>
+          <input type="date" class="form-control">
+
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label>Сумма долга</label>
+          <input type="number" class="form-control">
+
+        </div>
+        <div class="col-md-2 mb-3">
+          <label>Валюта</label>
+          <select class="custom-select">
+            <option selected>BYN</option>
+            <option value="1">RUB</option>
+            <option value="2">USB</option>
+            <option value="3">UAR</option>
+          </select>
+        </div>
+        <div class="col-md-6 mb-4 mt-4 pt-2" style="display: flex; justify-content: space-between">
+          <div class="btn-group btn-group-toggle col-md-12" data-toggle="buttons">
+            <label class="btn btn-outline-secondary">
+              <input type="radio" name="options" id="option1"> Мне должны
+            </label>
+            <label class="btn btn-outline-secondary active">
+              <input type="radio" name="options" id="option2"> Я должен
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12">
+          <button class="btn btn-primary col-md-12" type="submit">Добавить</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+</div>
