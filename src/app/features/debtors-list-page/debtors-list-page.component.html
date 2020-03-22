@@ -1,0 +1,69 @@
+<div class="card mb-3 p-2" *ngFor="let debtor of debtors | searchDebtors:searchService.searchStr">
+  <div class="row no-gutters">
+    <div class="col-md-3">
+      <img
+        [src]="debtor.avatar ? debtor.avatar : '../../../assets/images.png'"
+        class="card-img" alt="...">
+    </div>
+    <div class="col-md-7">
+      <div class="card-body" align="left">
+        <h5 class="card-title" (click)="openDebtor(debtor._id)">{{debtor.name}}</h5>
+        <p class="card-text">
+          Номер телефона: {{debtor.tNumber}} <br>
+          Email: {{debtor.email}}
+        </p>
+        <p class="card-text"><small class="text-muted">Дата возврата: {{debtor.dateOfPayment | date}}</small></p>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-primary mt-3" *ngIf="debtor.status === 1" (click)="editStatus(debtor._id)">
+        {{debtor.amount}} <span class="badge badge-light">{{debtor.currency}}</span>
+      </button>
+      <button type="button" class="btn btn-success mt-3" disabled *ngIf="debtor.status === 2">
+        Вернули
+      </button>
+      <div>
+        <small class="text-muted" *ngIf="debtor.isI">Вы должны</small>
+        <small class="text-muted" *ngIf="!debtor.isI">Вам должны</small>
+      </div>
+      <button type="button" class="btn btn-danger mt-3" (click)="debtorRemove(debtor._id)">
+        Удалить
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,11 +1,11 @@
-import {AbstractControl, ValidatorFn} from '@angular/forms';
+import { FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 export class CustomValidators {
-  static confirmPassword(pass: string): ValidatorFn {
-   return (control: AbstractControl): {[key: string]: any} | null => {
-     console.log('asdasd');
-     const isConfirm = pass !== control.value;
-     return isConfirm ? { confirmPass : {value : control.value} } : null;
-   };
+  static confirmPassword: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+    const pass = control.get('pass').value;
+    const confPass = control.get('conf_pass').value;
+    console.log(pass === confPass);
+    return pass === confPass ? null : { noConfirm: true};
   }
 }
+

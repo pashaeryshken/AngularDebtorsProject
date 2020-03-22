@@ -1,0 +1,95 @@
+<div class="row justify-content-center  align-items-center">
+  <form
+    class="col-md-9 needs-validation p-3"
+    [formGroup]="signForm" (ngSubmit)="submit()"
+  >
+    <h2 class="form-title">РЕГИСТРАЦИЯ</h2>
+    <!--<div class="form-danger" *ngIf="auth.error$ | async as error">
+      {{error}}
+    </div>-->
+
+    <div class="form-group">
+      <label for="name">Имя:</label>
+      <input type="email" class="form-control" id="name" aria-describedby="emailHelp" formControlName="userName">
+      <div
+        *ngIf="signForm.get('userName').errors && signForm.get('userName').touched"
+        class="alert-danger mt-1 pl-1"
+      >
+        <small *ngIf="signForm.get('userName').errors.required">
+          Поле не может быть пустым
+        </small>
+        <small *ngIf="signForm.get('userName').errors.minlength">
+          Введите имя не менее {{signForm.get('userName').errors.minlength.requiredLength}} символов
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+      <div
+        *ngIf="signForm.get('email').errors && signForm.get('email').touched"
+        class="alert-danger mt-1 pl-1"
+      >
+        <small *ngIf="signForm.get('email').errors.required">
+          Поле не может быть пустым
+        </small>
+        <small *ngIf="signForm.get('email').errors.email">Введите корректный email</small>
+      </div>
+    </div>
+    <div formGroupName="password" >
+      <div class="form-group">
+        <label for="password">Пароль:</label>
+        <input type="password" class="form-control" id="password" formControlName="pass">
+        <div
+          *ngIf="signForm.get('password').get('pass').errors && signForm.get('password').get('pass').touched"
+          class="alert-danger mt-1 pl-1"
+        >
+          <small *ngIf="signForm.get('password').get('pass').errors.required">
+            Поле не может быть пустым
+          </small>
+          <small *ngIf="signForm.get('password').get('pass').errors.minlength">
+            Веедите пароль не менее {{signForm.get('password').get('pass').errors.minlength.requiredLength}} сиимволов
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Подтверждение пароля:</label>
+        <input type="password" class="form-control" id="confirm-password" formControlName="conf_pass">
+        <div
+          *ngIf="signForm.get('password').get('conf_pass').errors
+            && signForm.get('password').get('conf_pass').touched"
+          class="alert-danger mt-1 pl-1"
+        >
+          <small *ngIf="signForm.get('password').get('conf_pass').errors.required">
+            Поле не может быть пустым.
+          </small>
+          <small *ngIf="signForm.get('password').get('conf_pass').errors.minlength">
+            Введите пароль не менее {{signForm.get('password').get('conf_pass').errors.minlength.requiredLength}}
+            сиимволов.
+          </small>
+        </div>
+        <div
+          class="alert-danger mt-1 pl-1"
+          *ngIf="signForm.get('password').errors
+          && signForm.get('password').get('conf_pass').touched
+          && signForm.get('password').get('pass').touched">
+          <small>
+            Пароли не совпадают
+          </small>
+        </div>
+      </div>
+
+    </div>
+
+
+    <button
+      type="submit"
+      class="btn btn-primary col-md-12 mt-1"
+      [disabled]="signForm.invalid || isSubmit"
+      >Подтвердить
+    </button>
+  </form>
+</div>
+

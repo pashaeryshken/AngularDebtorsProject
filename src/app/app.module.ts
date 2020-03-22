@@ -3,21 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {CoreModule} from './core/core.module';
-import {AppRoutingModule} from './app-routing.module';
-import { CreateDebtorPageComponent } from './create-debtor-page/create-debtor-page.component';
+import {CoreRoutingModule} from './core/core-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CreateDebtorPageComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     CoreModule,
-    AppRoutingModule
+    CoreRoutingModule
   ],
   exports: [
-    AppRoutingModule
+    CoreRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

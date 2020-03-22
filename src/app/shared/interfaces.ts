@@ -15,11 +15,15 @@ export interface SignData {
 }
 
 export interface DebtorsResponse {
+  avatar?: string
+  email: string
   date: Date
   dateOfPayment: Date
   status: number
+  address: string
+  tNumber: string
   currency: string
-  _id: string
+  _id?: string
   isI: boolean
   name: string
   amount: number

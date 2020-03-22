@@ -1,0 +1,30 @@
+<nav class="navbar ">
+  <a class="navbar-brand" routerLink="/debtors">
+    <img src="../../../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    КОЛЛЕКТОР
+  </a>
+
+  <div>
+    <a
+      *ngIf="auth.isAuthenticated(); else loginBlock"
+      href="#"
+      (click)="logout($event)"
+    >
+      Выйти
+    </a>
+    <ng-template #loginBlock>
+      <a
+        href="#"
+        routerLink="/login"
+      >ВХОД</a>
+      <strong>/</strong>
+      <a
+        href="#"
+        routerLink="/sign"
+      >РЕГИСТРАЦИЯ</a>
+    </ng-template>
+  </div>
+</nav>
+<div class="container col-md-12 mt-3 ">
+  <router-outlet></router-outlet>
+</div>

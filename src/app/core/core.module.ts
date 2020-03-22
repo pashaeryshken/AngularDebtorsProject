@@ -1,31 +1,25 @@
 import {NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
 import {CommonModule} from '@angular/common';
-import {LoginModule} from '../login-page/login.module';
+import {LoginModule} from '../features/login-page/login.module';
 import {HttpClientModule} from '@angular/common/http';
-import {MainLayoutModule} from '../main-layout/main-layout.module';
-import {DebtorPageModule} from '../debtor-page/debtor-page.module';
-import {DebtorsListPageModule} from '../debtors-list-page/debtors-list-page.module';
-import {SignPageModule} from '../sign-page/sign-page.module';
+import {FormsModule} from '@angular/forms';
+import {CoreRoutingModule} from './core-routing.module';
+import {MainLayoutComponent} from './components/main-layout/main-layout.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [MainLayoutComponent],
   imports: [
     CommonModule,
     SharedModule,
     LoginModule,
-    MainLayoutModule,
     HttpClientModule,
-    DebtorPageModule,
-    DebtorsListPageModule,
-    SignPageModule
+    FormsModule,
+    CoreRoutingModule,
   ],
   exports: [
     LoginModule,
-    MainLayoutModule,
-    DebtorPageModule,
-    DebtorsListPageModule,
-    SignPageModule
+    MainLayoutComponent
   ],
 })
 export class CoreModule {}

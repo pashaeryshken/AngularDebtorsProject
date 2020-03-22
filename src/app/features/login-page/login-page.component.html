@@ -1,0 +1,43 @@
+
+  <div class="row justify-content-center  align-items-center">
+    <form
+      class="col-md-9 mt-3 needs-validation p-3"
+      [formGroup]="loginForm"
+      (ngSubmit)="submit()"
+      [ngClass]="{'container-warning' : auth.error$ | async}">
+      <h2 class="form-title">АВТОРИЗАЦИЯ</h2>
+      <div class="form-danger" *ngIf="auth.error$ | async as error">
+        {{error}}
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+        <div
+          *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
+          class="alert-danger mt-1 pl-1"
+        >
+          <small *ngIf="loginForm.get('email').errors.required">Поле не может быть пустым</small>
+          <small *ngIf="loginForm.get('email').errors.email">Введите корректный email</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password" class="form-control" id="password" formControlName="password">
+        <div
+          *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"
+          class="alert-danger mt-1 pl-1"
+        >
+          <small *ngIf="loginForm.get('password').errors.required">
+            Поле не может быть пустым
+          </small>
+          <small *ngIf="loginForm.get('password').errors.minlength">
+            Веедите пароль не менее {{loginForm.get('password').errors.minlength.requiredLength}} символов
+          </small>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary col-md-12 mt-1"
+        [disabled]="loginForm.invalid || isSubmit">Вход</button>
+    </form>
+  </div>
