@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AuthResponse, SignData} from '../interfaces';
+import {AuthResponse, SignData} from '../shared/interfaces';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
@@ -14,7 +14,7 @@ export class SignService {
   }
 
   sign(signData: SignData): Observable<AuthResponse> {
-    return this.http.post('http://localhost:3333/users/signup', signData)
+    return this.http.post<AuthResponse>('http://localhost:3333/users/signup', signData)
       .pipe(
         tap(this.auth.setToken)
       );

@@ -1,9 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../../shared/services/auth.service';
-import {DebtorsService} from '../../shared/services/debtors.service';
+import {AuthService} from '../../services/auth.service';
+import {DebtorsService} from '../../services/debtors.service';
 import {DebtorsResponse} from '../../shared/interfaces';
 import {Subject} from 'rxjs';
-import {SearchService} from '../../shared/services/search.service';
+import {SearchService} from '../../services/search.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -13,9 +13,9 @@ import {Router} from '@angular/router';
 })
 export class DebtorsListPageComponent implements OnInit, OnDestroy {
 
-  debtors: DebtorsResponse[] = [];
-  destroySubject$: Subject<void> = new Subject();
-  @Input() searchStr: string;
+  public debtors: DebtorsResponse[] = [];
+  public destroySubject$: Subject<void> = new Subject();
+  @Input() public searchStr: string;
 
   constructor(
     private auth: AuthService,
@@ -24,36 +24,29 @@ export class DebtorsListPageComponent implements OnInit, OnDestroy {
     public router: Router) {
   }
 
-  ngOnInit(): void {
-    /*  this.auth.userData().subscribe(res => {
-        console.log(res);
-      });*/
-    setTimeout(() => {
-      this.debtorsService.getDebtors().subscribe(res => {
-        this.debtors = res.slice();
-        console.log(this.debtors);
-      });
-    }, 1000);
+  public ngOnInit(): void {
+    this.debtorsService.getDebtors().subscribe(res => {
+      this.debtors = res.slice();
+    });
   }
 
-  debtorRemove(id: string) {
+  public debtorRemove(id: string): void {
     this.debtorsService.removeDebtor(id).subscribe(() => {
       this.debtors = this.debtors.filter(debtor => id !== debtor._id);
     });
   }
 
-  editStatus(id: string) {
-    this.debtorsService.setStatus(id).subscribe(() => {
-      this.debtors.find(debtor => id === debtor._id).status = 2;
+  public editStatus(id: string, status: number): void {
+    this.debtorsService.setStatus(id, status).subscribe(() => {
+      this.debtors.find(debtor => id === debtor._id).status = status;
     });
   }
 
-  ngOnDestroy(): void {
-    this.destroySubject$.next();
+  public openDebtor(id: string): void {
+    this.router.navigate(['/debtors', id]);
   }
 
-
-  openDebtor(id: string) {
-    this.router.navigate(['/debtors', id]);
+  public ngOnDestroy(): void {
+    this.destroySubject$.next();
   }
 }

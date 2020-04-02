@@ -1,9 +1,11 @@
-<div class="card mb-3 p-2" *ngFor="let debtor of debtors | searchDebtors:searchService.searchStr">
+<ng-container *ngIf="debtors.length; else notDebtors">
+<div class="card mb-3 p-2"
+     *ngFor="let debtor of debtors | searchDebtors:searchService.search">
   <div class="row no-gutters">
     <div class="col-md-3">
       <img
         [src]="debtor.avatar ? debtor.avatar : '../../../assets/images.png'"
-        class="card-img" alt="...">
+        class="card-img">
     </div>
     <div class="col-md-7">
       <div class="card-body" align="left">
@@ -16,10 +18,14 @@
       </div>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-primary mt-3" *ngIf="debtor.status === 1" (click)="editStatus(debtor._id)">
+      <button type="button" class="btn btn-primary mt-3"
+              *ngIf="debtor.status === 1"
+              (click)="editStatus(debtor._id,2)">
         {{debtor.amount}} <span class="badge badge-light">{{debtor.currency}}</span>
       </button>
-      <button type="button" class="btn btn-success mt-3" disabled *ngIf="debtor.status === 2">
+      <button type="button" class="btn btn-success mt-3"
+              *ngIf="debtor.status === 2"
+              (click)="editStatus(debtor._id,1)">
         Вернули
       </button>
       <div>
@@ -32,6 +38,16 @@
     </div>
   </div>
 </div>
+</ng-container>
+
+<ng-template #notDebtors>
+  <div class="alert alert-primary" role="alert">
+    У вас нет долгов,
+    <a routerLink="/debtors/create" class="alert-link">
+      нажмите здесь для добавления
+    </a>
+  </div>
+</ng-template>
 
 
 

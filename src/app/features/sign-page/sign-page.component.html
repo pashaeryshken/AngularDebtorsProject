@@ -40,16 +40,16 @@
     <div formGroupName="password" >
       <div class="form-group">
         <label for="password">Пароль:</label>
-        <input type="password" class="form-control" id="password" formControlName="pass">
+        <input type="password" class="form-control" id="password" formControlName="password">
         <div
-          *ngIf="signForm.get('password').get('pass').errors && signForm.get('password').get('pass').touched"
+          *ngIf="signForm.get('password').get('password').errors && signForm.get('password').get('password').touched"
           class="alert-danger mt-1 pl-1"
         >
-          <small *ngIf="signForm.get('password').get('pass').errors.required">
+          <small *ngIf="signForm.get('password').get('password').errors.required">
             Поле не может быть пустым
           </small>
-          <small *ngIf="signForm.get('password').get('pass').errors.minlength">
-            Веедите пароль не менее {{signForm.get('password').get('pass').errors.minlength.requiredLength}} сиимволов
+          <small *ngIf="signForm.get('password').get('password').errors.minlength">
+            Веедите пароль не менее {{signForm.get('password').get('password').errors.minlength.requiredLength}} сиимволов
           </small>
         </div>
       </div>
@@ -74,7 +74,7 @@
           class="alert-danger mt-1 pl-1"
           *ngIf="signForm.get('password').errors
           && signForm.get('password').get('conf_pass').touched
-          && signForm.get('password').get('pass').touched">
+          && signForm.get('password').get('password').touched">
           <small>
             Пароли не совпадают
           </small>

@@ -1,3 +1,6 @@
+
+
+
 .label-file{
   position: absolute;
   display: block;
@@ -40,4 +43,12 @@
   overflow: hidden;
   position: absolute;
   z-index: -1;
+}
+
+.number-code{
+  border-radius: 5px 0 0 5px;
+
+  &:focus{
+    outline: none;
+  }
 }

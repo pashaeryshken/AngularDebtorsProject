@@ -7,7 +7,7 @@ import {CoreRoutingModule} from './core/core-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

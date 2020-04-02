@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../../shared/services/auth.service';
+import {AuthService} from '../../../services/auth.service';
 import {Router} from '@angular/router';
+import {SearchService} from '../../../services/search.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -9,11 +10,11 @@ import {Router} from '@angular/router';
 })
 export class MainLayoutComponent implements OnInit {
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router, public searchService: SearchService) { }
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 
-  logout(event: Event) {
+  public logout(event: Event): void {
     this.auth.logout();
     event.preventDefault();
     this.router.navigate(['/login']);

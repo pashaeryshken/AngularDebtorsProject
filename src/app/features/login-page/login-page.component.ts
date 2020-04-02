@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../shared/interfaces';
-import {AuthService} from '../../shared/services/auth.service';
+import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,15 +11,13 @@ import {Router} from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
-  loginForm: FormGroup;
-  isSubmit = false;
+  public loginForm: FormGroup;
+  public isSubmit: boolean = false;
 
   constructor(public auth: AuthService, private router: Router) {
   }
 
-
-
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [
         Validators.email,
@@ -30,7 +28,7 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  submit() {
+  public submit(): void {
     if (this.loginForm.valid) {
       this.isSubmit = true;
       const user: User = {...this.loginForm.value};

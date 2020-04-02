@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {SearchService} from '../../../shared/services/search.service';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {SearchService} from '../../../services/search.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,33 +9,39 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  isSearch = false;
-  searchStr = '';
-
-
-  @ViewChild('input') input;
+  @ViewChild('input') public input: ElementRef;
 
   constructor(public searchService: SearchService, private router: Router) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
-  openSearch(event: Event) {
+  public openSearch(event: Event): void {
     event.preventDefault();
     if (this.router.url !== '/debtors') {
       this.router.navigate(['/debtors']);
     }
-    this.isSearch = !this.isSearch;
-    setTimeout(() => {
-      this.input.nativeElement.focus();
-    }, 500);
+    this.searchService.isSearch = !this.searchService.isSearch;
+    if (this.searchService.isSearch) {
+      setTimeout(() => {
+        this.input.nativeElement.focus();
+      }, 500);
+    } else {
+      this.input.nativeElement.blur();
+    }
   }
 
-  closeSearch() {
-    if (!this.searchService.searchStr) {
-      this.isSearch = !this.isSearch;
-    }
+  public closeSearch(): void {
+    setTimeout(() => {
+      if (this.searchService.isSearch) {
+        this.searchService.isSearch = false;
+        this.searchService.searchStr = '';
+        this.searchService.searchFilter = 'all';
+        this.input.nativeElement.blur();
+      }
+    });
+
   }
 
 }

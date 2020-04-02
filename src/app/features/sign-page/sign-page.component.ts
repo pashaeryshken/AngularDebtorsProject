@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import {SignService} from '../../shared/services/sign.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {SignService} from '../../services/sign.service';
 import {SignData} from '../../shared/interfaces';
 import {Router} from '@angular/router';
 import {CustomValidators} from '../../shared/custom.validators';
@@ -12,13 +12,13 @@ import {CustomValidators} from '../../shared/custom.validators';
 })
 export class SignPageComponent implements OnInit {
 
-  signForm: FormGroup;
-  isSubmit = false;
+  public signForm: FormGroup;
+  public isSubmit: boolean = false;
 
   constructor(private sign: SignService, private router: Router) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.signForm = new FormGroup({
       userName: new FormControl(null,
         [
@@ -30,8 +30,8 @@ export class SignPageComponent implements OnInit {
           Validators.required,
           Validators.email
         ]),
-      password: new FormGroup( {
-        pass: new FormControl(null,
+      password: new FormGroup({
+        password: new FormControl(null,
           [
             Validators.required,
             Validators.minLength(6)
@@ -40,36 +40,29 @@ export class SignPageComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(6),
-          ]),
-      }, [CustomValidators.confirmPassword])
+          ])
+      }, [
+        CustomValidators.confirmPassword
+      ])
     });
   }
-  private passEqual(): ValidatorFn {
-    return (control: FormControl) => {
-      return (!control.dirty && !control.touched) ||
-      this.signForm.get('pass').value === this.signForm.get('conf_pass').value ?
-        null :
-        {custom: 'пароли не совпадают'};
-    };
-  }
 
-  submit() {
-    console.log(this.signForm.get('password'));
+  public submit(): void {
     if (this.signForm.valid) {
-      if (this.signForm.value.password === this.signForm.value.confPassword) {
-        console.log('good');
-        const signData: SignData = {
-          userName: this.signForm.value.userName,
-          email: this.signForm.value.email,
-          password: this.signForm.value.pass
-        };
-        this.isSubmit = true;
-        this.sign.sign(signData).subscribe(() => {
-          this.signForm.reset();
-          this.isSubmit = false;
-          this.router.navigate(['/debtors']);
-        });
-      }
+      const signData: SignData = {
+        userName: this.signForm.value.userName,
+        email: this.signForm.value.email,
+        password: this.signForm.value.password.password
+      };
+      this.isSubmit = true;
+      this.sign.sign(signData).subscribe(() => {
+        this.signForm.reset();
+        this.isSubmit = false;
+        this.router.navigate(['/debtors']);
+      },
+      err => {
+        this.isSubmit = false;
+      });
     }
   }
 }

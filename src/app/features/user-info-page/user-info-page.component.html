@@ -1,2 +1,26 @@
+<div class="card">
 
-<h1>User-info</h1>
+  <div class="row justify-content-center">
+    <h4 class="card-title text-center">СТАТИСТИКА ДОЛГОВ</h4>
+  </div>
+  <div class="row" *ngIf="userData">
+    <div class="col-md-4" >
+      <p>Вам должны</p>
+      <p>{{userData.debtorsTotal}}</p>
+    </div>
+    <app-circle-diagram
+      [iTotalAmount]="userData.iTotalAmount"
+      [debtorTotal]="userData.debtorsTotal"></app-circle-diagram>
+    <div class="col-md-4">
+      <p>Вы должны</p>
+      <p>{{userData.iTotalAmount}}</p>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row justify-content-around">
+    <button type="button" (click)="navigate(false)" class="btn btn-success">Вам должны</button>
+    <button type="button" (click)="navigate(true)" class="btn btn-danger">Вы должны</button>
+  </div>
+
+</div>

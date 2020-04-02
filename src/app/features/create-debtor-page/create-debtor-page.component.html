@@ -20,7 +20,7 @@
           type="file"
           class="form-control control-file"
           #fileInput
-          (change)="addPhoto($event)">
+          (change)="addPhoto($event.target.files)">
       </div>
       <div class="col-md-8">
         <div class="mb-3">
@@ -45,15 +45,27 @@
     <div class="form-row">
       <div class="col-md-6 mb-3">
         <label>Адрес</label>
-        <input type="text" class="form-control"
-               formControlName="address">
+        <input type="text"
+               class="form-control"
+               formControlName="address"
+        >
       </div>
 
       <div class="col-md-6 mb-3">
-        <label>Телефон</label>
-        <input type="text" class="form-control"
-               formControlName="tNumber"
-        >
+        <label>Телефон</label><br>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+          <select class="custom-select number-code">
+            <option>+375</option>
+            <option>+7</option>
+          </select>
+          </div>
+
+          <input type="text" class="form-control"
+                 formControlName="tNumber"
+          >
+        </div>
       </div>
 
     </div>
