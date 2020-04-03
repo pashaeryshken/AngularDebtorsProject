@@ -1,0 +1,152 @@
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-modal="true"
+  #modal>
+  <div class="modal-backdrop" (click)="close()"></div>
+  <div class="container" role="document">
+    <div class="row justify-content-center align-items-center col-md-12">
+      <form class="needs-validation col-md-10 mt-4 mb-4" novalidate [formGroup]="createForm">
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <div
+              class="label-file"
+              align="center"
+              (click)="fileInput.click()"
+              appDragAndDrop
+              (onFileDropped)="addPhoto($event)"
+            >
+              <div *ngIf="isPhotoAdd else img" class="addPhoto">
+                Добавить фото
+              </div>
+              <ng-template #img>
+                <img id="avatar" alt="">
+              </ng-template>
+            </div>
+            <input
+              type="file"
+              class="form-control control-file"
+              #fileInput
+              (change)="addPhoto($event.target.files)">
+          </div>
+          <div class="col-md-8">
+            <div class="mb-3">
+              <label for="name">Имя</label>
+              <input type="text" class="form-control" id="name"
+                     formControlName="name">
+              <div class="valid-tooltip">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email"
+                     formControlName="email">
+              <div class="valid-tooltip">
+                Looks good!
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label>Адрес</label>
+            <input type="text"
+                   class="form-control"
+                   formControlName="address"
+            >
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label>Телефон</label><br>
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <select class="custom-select number-code">
+                  <option>+375</option>
+                  <option>+7</option>
+                </select>
+              </div>
+
+              <input type="text" class="form-control"
+                     formControlName="tNumber"
+              >
+            </div>
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-md-6 col-sm-6 mb-3">
+            <label>Дата начала</label>
+            <input
+              type="date"
+              class="form-control"
+              formControlName="date"
+            >
+          </div>
+
+          <div class="col-md-6 col-sm-6 mb-3">
+            <label>Дата возврата</label>
+            <input
+              type="date"
+              class="form-control"
+              formControlName="dateOfPayment"
+            >
+          </div>
+
+        </div>
+        <div class="form-row">
+          <div class="col-md-4 mb-3 col-sm-6">
+            <label>Сумма долга</label>
+            <input type="number" min="1" class="form-control" formControlName="amount">
+          </div>
+
+          <div class="col-md-2 mb-3 col-sm-6">
+            <label>Валюта</label>
+            <select class="custom-select" formControlName="currency">
+              <option *ngFor="let currency of currencyState" [ngValue]="currency">{{currency}}</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-4 mt-4 pt-2" style="display: flex; justify-content: space-between">
+            <div class="btn-group btn-group-toggle col-md-12" data-toggle="buttons">
+              <label
+                class="btn btn-outline-secondary"
+                [ngClass]="{'active' : this.createForm.get('isI').value === 'false'}"
+              >
+                <input type="radio" name="isI" id="option1" formControlName="isI" value="false"> Мне должны
+              </label>
+
+              <label
+                class="btn btn-outline-secondary"
+                [ngClass]="{'active' : this.createForm.get('isI').value === 'true'}"
+              >
+                <input type="radio" name="isI" id="option2" formControlName="isI" value="true"> Я должен
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6 ">
+            <button class="btn btn-primary col-md-12" type="submit" (click)="submit()">Добавить</button>
+          </div>
+
+          <div class="col-md-3 mt-md-0 mt-sm-2">
+            <button class="btn btn-secondary col-md-12" type="submit" (click)="clear()">Очитсть</button>
+          </div>
+
+          <div class="col-md-3 mt-md-0 mt-sm-2">
+            <button class="btn btn-danger col-md-12" type="submit" (click)="close()">Отменить</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

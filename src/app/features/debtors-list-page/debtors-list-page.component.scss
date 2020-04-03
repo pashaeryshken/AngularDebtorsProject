@@ -10,7 +10,13 @@ img{
   height: 100%;
 }
 
+.btn{
+  width: 108px;
+}
 
+.text-muted{
+  text-align: center;
+}
 
 .transform{
   overflow: hidden;
@@ -38,3 +44,20 @@ img{
     color: #007bff;
   }
 }
+
+.remove-btn{
+  position: relative;
+  button{
+    transition: bottom 0.5s;
+  }
+}
+
+.edit-btn{
+  cursor: pointer;
+  color: #6c757d;
+  &:hover{
+    color: #007bff;
+  }
+}
+
+

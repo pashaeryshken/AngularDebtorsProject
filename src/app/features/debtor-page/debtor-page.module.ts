@@ -15,7 +15,8 @@ import {RouterModule} from '@angular/router';
       path: '', component: DebtorPageComponent
     }])
   ],
-  exports: []
+  exports: [
+  ]
 })
 export class DebtorPageModule {
 }

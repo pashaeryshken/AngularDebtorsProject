@@ -1,10 +1,15 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {DebtorsService} from '../../services/debtors.service';
 import {DebtorsResponse} from '../../shared/interfaces';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {SearchService} from '../../services/search.service';
 import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../core/store/state/app.state';
+import {GetDebtorsAction, RemoveDebtorsAction} from '../../core/store/actions/debtors.action';
+import {map, takeUntil} from 'rxjs/operators';
+import {DebtorsState} from '../../core/store/state/debtors.state';
 
 @Component({
   selector: 'app-debtors-list-page',
@@ -14,26 +19,39 @@ import {Router} from '@angular/router';
 export class DebtorsListPageComponent implements OnInit, OnDestroy {
 
   public debtors: DebtorsResponse[] = [];
-  public destroySubject$: Subject<void> = new Subject();
+  public destroy$: Subject<void> = new Subject();
+  public debtorsLoading$: Observable<boolean>;
+  public modalOpen: boolean = false;
   @Input() public searchStr: string;
 
   constructor(
     private auth: AuthService,
     private debtorsService: DebtorsService,
     public searchService: SearchService,
-    public router: Router) {
+    public router: Router,
+    public store: Store<AppState>,
+  ) {
   }
 
   public ngOnInit(): void {
-    this.debtorsService.getDebtors().subscribe(res => {
-      this.debtors = res.slice();
+    this.store.dispatch(new GetDebtorsAction());
+    this.store.select((state: AppState) => {
+      return state.debtorsState.debtors;
+    }).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe((debtors: DebtorsResponse[]) => {
+      this.debtors = debtors;
     });
+
+    this.debtorsLoading$ = this.store.select('debtorsState').pipe(
+      map((state: DebtorsState) => {
+        return state.debtorsLoading;
+      })
+    );
   }
 
   public debtorRemove(id: string): void {
-    this.debtorsService.removeDebtor(id).subscribe(() => {
-      this.debtors = this.debtors.filter(debtor => id !== debtor._id);
-    });
+    this.store.dispatch(new RemoveDebtorsAction(id));
   }
 
   public editStatus(id: string, status: number): void {
@@ -47,6 +65,10 @@ export class DebtorsListPageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.destroySubject$.next();
+    this.destroy$.next();
+  }
+
+  public showModal(): void {
+    this.modalOpen = !this.modalOpen;
   }
 }

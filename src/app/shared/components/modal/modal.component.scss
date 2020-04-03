@@ -1,5 +1,12 @@
+.modal-backdrop{
+  background: rgba(0,0,0, 0.53);
+  z-index: 10;
+}
 
-
+form{
+  z-index: 20;
+  background: white;
+}
 
 .label-file{
   position: absolute;
@@ -52,3 +59,4 @@
     outline: none;
   }
 }
+

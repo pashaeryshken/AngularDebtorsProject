@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   @ViewChild('input') public input: ElementRef;
-
+  public isShow: boolean = false;
   constructor(public searchService: SearchService, private router: Router) {
   }
 
@@ -41,7 +41,10 @@ export class NavbarComponent implements OnInit {
         this.input.nativeElement.blur();
       }
     });
+  }
 
+  public showModal(): void {
+    this.isShow = !this.isShow;
   }
 
 }

@@ -1,16 +1,34 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {DebtorsService} from '../../services/debtors.service';
+import {
+  AfterContentChecked,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
+import {DebtorsService} from '../../../services/debtors.service';
 import {Router} from '@angular/router';
 import {DatePipe} from '@angular/common';
-import {DebtorsResponse} from '../../shared/interfaces';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../../core/store/state/app.state';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {DebtorsResponse} from '../../interfaces';
+import {AddDebtorAction} from '../../../core/store/actions/debtors.action';
 
 @Component({
-  selector: 'app-create-debtor-page',
-  templateUrl: './create-debtor-page.component.html',
-  styleUrls: ['./create-debtor-page.component.scss']
+  selector: 'app-modal-component',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.scss']
 })
-export class CreateDebtorPageComponent implements OnInit {
+
+export class ModalComponent implements AfterContentChecked, OnInit {
+
+  @Input('isShow') public isShow: boolean;
+  @Output('close') public closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @ViewChild('modal') public modal: ElementRef;
 
   public createForm: FormGroup;
   public dateNow: string = this.datePipe.transform(Date.now(), 'yyyy-MM-dd');
@@ -26,7 +44,31 @@ export class CreateDebtorPageComponent implements OnInit {
     'PLZ',
   ];
 
-  constructor(private debtorsService: DebtorsService, private router: Router, private datePipe: DatePipe) {
+  constructor(private renderer: Renderer2,
+              private debtorsService: DebtorsService,
+              private router: Router,
+              private datePipe: DatePipe,
+              private store: Store<AppState>
+  ) {
+  }
+
+  public ngAfterContentChecked(): void {
+    if (this.isShow) {
+      this.renderer.setStyle(this.modal.nativeElement, 'display', 'block');
+      setTimeout(() => {
+        this.renderer.addClass(this.modal.nativeElement, 'show');
+      });
+    } else if (this.modal) {
+      this.renderer.removeClass(this.modal.nativeElement, 'show');
+      setTimeout(() => {
+        this.renderer.setStyle(this.modal.nativeElement, 'display', 'none');
+      }, 500);
+    }
+  }
+
+  public close(): void {
+    this.clear();
+    this.closeModal.emit(null);
   }
 
   public ngOnInit(): void {
@@ -54,15 +96,10 @@ export class CreateDebtorPageComponent implements OnInit {
     } else {
       dataDebtors = this.createForm.value;
     }
-    this.debtorsService.setDebtor(dataDebtors).subscribe(() => {
-      this.clear();
-      this.router.navigate(['/debtors']);
-    });
-  }
-
-  public close(): void {
+    this.store.dispatch(new AddDebtorAction(dataDebtors));
     this.clear();
-    this.router.navigate([this.toBackUrl]);
+    this.close();
+
   }
 
   public clear(): void {

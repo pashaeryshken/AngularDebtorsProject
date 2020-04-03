@@ -1,85 +1,71 @@
-<ng-container *ngIf="debtors.length; else notDebtors">
-<div class="card mb-3 p-2"
-     *ngFor="let debtor of debtors | searchDebtors:searchService.search">
-  <div class="row no-gutters">
-    <div class="col-md-3">
-      <img
-        [src]="debtor.avatar ? debtor.avatar : '../../../assets/images.png'"
-        class="card-img">
-    </div>
-    <div class="col-md-7">
-      <div class="card-body" align="left">
-        <h5 class="card-title" (click)="openDebtor(debtor._id)">{{debtor.name}}</h5>
-        <p class="card-text">
-          Номер телефона: {{debtor.tNumber}} <br>
-          Email: {{debtor.email}}
-        </p>
-        <p class="card-text"><small class="text-muted">Дата возврата: {{debtor.dateOfPayment | date}}</small></p>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <button type="button" class="btn btn-primary mt-3"
-              *ngIf="debtor.status === 1"
-              (click)="editStatus(debtor._id,2)">
-        {{debtor.amount}} <span class="badge badge-light">{{debtor.currency}}</span>
-      </button>
-      <button type="button" class="btn btn-success mt-3"
-              *ngIf="debtor.status === 2"
-              (click)="editStatus(debtor._id,1)">
-        Вернули
-      </button>
-      <div>
-        <small class="text-muted" *ngIf="debtor.isI">Вы должны</small>
-        <small class="text-muted" *ngIf="!debtor.isI">Вам должны</small>
-      </div>
-      <button type="button" class="btn btn-danger mt-3" (click)="debtorRemove(debtor._id)">
-        Удалить
-      </button>
-    </div>
-  </div>
-</div>
+<ng-container *ngIf="debtorsLoading$| async">
+  <h1>Loading</h1>
 </ng-container>
 
-<ng-template #notDebtors>
-  <div class="alert alert-primary" role="alert">
-    У вас нет долгов,
-    <a routerLink="/debtors/create" class="alert-link">
-      нажмите здесь для добавления
-    </a>
-  </div>
-</ng-template>
+<ng-container *ngIf="!(debtorsLoading$| async)">
+  <ng-container *ngIf="debtors.length; else notDebtors">
+    <div class="card mb-3 p-2"
+         *ngFor="let debtor of debtors | searchDebtors:searchService.search">
+      <div class="row no-gutters">
+        <div class="col-md-3">
+          <img
+            [src]="debtor.avatar ? debtor.avatar : '../../../assets/images.png'"
+            class="card-img">
+        </div>
+        <div class="col-md-7">
+          <div class="card-body" align="left">
+            <h5 class="card-title" (click)="openDebtor(debtor._id)">{{debtor.name}}</h5>
+            <p class="card-text">
+              Номер телефона: {{debtor.tNumber}} <br>
+              Email: {{debtor.email}}
+            </p>
+            <p class="card-text"><small class="text-muted">Дата возврата: {{debtor.dateOfPayment | date}}</small></p>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary mt-3"
+                  *ngIf="debtor.status === 1"
+                  (click)="editStatus(debtor._id,2)">
+            {{debtor.amount}} <span class="badge badge-light">{{debtor.currency}}</span>
+          </button>
+          <button type="button" class="btn btn-success mt-3"
+                  *ngIf="debtor.status === 2"
+                  (click)="editStatus(debtor._id,1)">
+            Вернули
+          </button>
+          <div class="text-center">
+            <small class="text-muted" *ngIf="debtor.isI">Вы должны</small>
+            <small class="text-muted" *ngIf="!debtor.isI">Вам должны</small>
+          </div>
+          <div class="remove-btn">
+          <button
+            type="button"
+            class="btn btn-danger mt-3 position-absolute"
+            appRemoveBtn
+          >
+            Удалить
+          </button>
+            <button type="button" class="btn btn-outline-secondary mt-3" (click)="debtorRemove(debtor._id)">
+              ОК
+            </button>
+          </div>
+          <div class="text-center edit-btn">
+            <small>редактировать</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <ng-template #notDebtors>
+    <div class="alert alert-primary" role="alert">
+      У вас нет долгов,
+      <a routerLink="/debtors/create" class="alert-link">
+        нажмите здесь для добавления
+      </a>
+    </div>
+  </ng-template>
+</ng-container>
 
 
 

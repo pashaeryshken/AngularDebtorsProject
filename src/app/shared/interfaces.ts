@@ -35,3 +35,9 @@ export interface UserData {
   iTotalAmount: number;
   debtorsTotal: number;
 }
+
+export interface UserToken {
+  token: string;
+  tokenExp: string;
+  TokenRefresh: string;
+}
