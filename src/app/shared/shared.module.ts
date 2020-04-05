@@ -8,6 +8,8 @@ import {DragAndDropDirective} from './directives/drag-and-drop/drag-and-drop.dir
 import {CircleDiagramComponent} from '../features/user-info-page/circle-deagram/circle-diagram.component';
 import {RemoveBtnDirective} from './directives/remove-btn/remove-btn.directive';
 import {ModalComponent} from './components/modal/modal.component';
+import { RemoveBtnDebtorComponent } from './components/remove-btn-debtor/remove-btn-debtor.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import {ModalComponent} from './components/modal/modal.component';
     DragAndDropDirective,
     CircleDiagramComponent,
     RemoveBtnDirective,
-    ModalComponent
+    ModalComponent,
+    RemoveBtnDebtorComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import {ModalComponent} from './components/modal/modal.component';
     DragAndDropDirective,
     CircleDiagramComponent,
     RemoveBtnDirective,
-    ModalComponent
+    ModalComponent,
+    RemoveBtnDebtorComponent
   ],
   providers: [DatePipe]
 })

@@ -1,6 +1,9 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Injector, OnInit, ViewChild} from '@angular/core';
 import {SearchService} from '../../../services/search.service';
+import { createCustomElement } from '@angular/elements';
 import {Router} from '@angular/router';
+import {ModalShowService} from '../../../services/modalShow.service';
+import {ModalComponent} from '../../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-navbar-layout',
@@ -10,8 +13,14 @@ import {Router} from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   @ViewChild('input') public input: ElementRef;
-  public isShow: boolean = false;
-  constructor(public searchService: SearchService, private router: Router) {
+
+  constructor(public searchService: SearchService,
+              private router: Router,
+              public modalShowService: ModalShowService,
+              public injector: Injector,
+              ) {
+    const PopupElement = createCustomElement(ModalComponent, {injector});
+    customElements.define('app-modal-component', PopupElement);
   }
 
   public ngOnInit(): void {
@@ -44,7 +53,7 @@ export class NavbarComponent implements OnInit {
   }
 
   public showModal(): void {
-    this.isShow = !this.isShow;
+    /*this.modalShowService.isShow = !this.modalShowService.isShow;*/
   }
 
 }

@@ -1,13 +1,7 @@
 import {
-  AfterContentChecked,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  Renderer2,
-  ViewChild
+  Component, ElementRef, EventEmitter,
+  OnInit, Output,
+  Renderer2, ViewChild
 } from '@angular/core';
 import {DebtorsService} from '../../../services/debtors.service';
 import {Router} from '@angular/router';
@@ -17,26 +11,35 @@ import {AppState} from '../../../core/store/state/app.state';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DebtorsResponse} from '../../interfaces';
 import {AddDebtorAction} from '../../../core/store/actions/debtors.action';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-modal-component',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+  styleUrls: ['./modal.component.scss'],
+  host: {
+    '[@state]': 'state',
+  },
+  animations: [
+    trigger('state', [
+      state('opened', style({})),
+      state('void, closed', style({opacity: 0})),
+      transition('* => *', animate('150ms ease-in')),
+    ])
+  ],
 })
 
-export class ModalComponent implements AfterContentChecked, OnInit {
+export class ModalComponent implements OnInit {
 
-  @Input('isShow') public isShow: boolean;
-  @Output('close') public closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @ViewChild('modal') public modal: ElementRef;
+  @ViewChild('avatar') public avatar: ElementRef;
+  @Output() public closed: EventEmitter<string> = new EventEmitter<string>();
 
   public createForm: FormGroup;
   public dateNow: string = this.datePipe.transform(Date.now(), 'yyyy-MM-dd');
   public filesName: string = '';
   public file: File;
-  public toBackUrl: string = '';
   public isPhotoAdd: boolean = true;
-
+  public state: 'opened' | 'closed' = 'closed';
   public currencyState: object = [
     'BYN',
     'USD',
@@ -50,25 +53,7 @@ export class ModalComponent implements AfterContentChecked, OnInit {
               private datePipe: DatePipe,
               private store: Store<AppState>
   ) {
-  }
-
-  public ngAfterContentChecked(): void {
-    if (this.isShow) {
-      this.renderer.setStyle(this.modal.nativeElement, 'display', 'block');
-      setTimeout(() => {
-        this.renderer.addClass(this.modal.nativeElement, 'show');
-      });
-    } else if (this.modal) {
-      this.renderer.removeClass(this.modal.nativeElement, 'show');
-      setTimeout(() => {
-        this.renderer.setStyle(this.modal.nativeElement, 'display', 'none');
-      }, 500);
-    }
-  }
-
-  public close(): void {
-    this.clear();
-    this.closeModal.emit(null);
+    this.state = 'opened';
   }
 
   public ngOnInit(): void {
@@ -85,6 +70,15 @@ export class ModalComponent implements AfterContentChecked, OnInit {
     });
   }
 
+  public close(): void {
+    this.clear();
+    this.state = 'closed';
+    setTimeout(() => {
+      this.closed.emit();
+    }, 150);
+
+  }
+
   public submit(): void {
     let dataDebtors: DebtorsResponse | FormData;
     if (this.file) {
@@ -97,17 +91,22 @@ export class ModalComponent implements AfterContentChecked, OnInit {
       dataDebtors = this.createForm.value;
     }
     this.store.dispatch(new AddDebtorAction(dataDebtors));
-    this.clear();
     this.close();
 
   }
 
   public clear(): void {
     this.createForm.reset();
+    this.createForm.get('date').setValue(this.dateNow);
+    this.createForm.get('dateOfPayment').setValue(this.dateNow);
+    this.createForm.get('amount').setValue(1);
+    this.createForm.get('currency').setValue(this.currencyState[0]);
+    this.createForm.get('isI').setValue(false);
+    this.file = null;
+    this.isPhotoAdd = true;
   }
 
   public addPhoto(event: FileList): void {
-    console.log(event);
     const element: File = event[0];
     this.file = element;
     this.filesName = element.name;
@@ -115,7 +114,7 @@ export class ModalComponent implements AfterContentChecked, OnInit {
     const reader: FileReader = new FileReader();
     reader.onload = (e: ProgressEvent<FileReader>) => {
       if (typeof e.target.result === 'string') {
-        (document.getElementById('avatar') as HTMLImageElement).src = e.target.result;
+        this.renderer.setAttribute(this.avatar.nativeElement, 'src', e.target.result);
       }
     };
     reader.readAsDataURL(this.file);

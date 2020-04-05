@@ -50,5 +50,11 @@ export class DebtorsService {
     });
   }
 
-
+  public getDebtor(id): Observable<DebtorsResponse>{
+    return this.http.get<DebtorsResponse>(`http://localhost:3333/debtors/${id}`, {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    });
+  }
 }

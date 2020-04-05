@@ -1,7 +1,7 @@
 section{
   display: flex;
   flex-flow: column;
-  margin: 0px;
+  margin: 0;
   max-width: 700px;
 }
 
@@ -12,6 +12,10 @@ img{
 
 .btn{
   width: 108px;
+}
+
+.alert-link{
+  cursor: pointer;
 }
 
 .text-muted{
@@ -45,12 +49,7 @@ img{
   }
 }
 
-.remove-btn{
-  position: relative;
-  button{
-    transition: bottom 0.5s;
-  }
-}
+
 
 .edit-btn{
   cursor: pointer;
@@ -60,4 +59,7 @@ img{
   }
 }
 
+.card{
+  transition: all 0.5s;
+}
 

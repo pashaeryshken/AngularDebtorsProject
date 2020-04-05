@@ -6,7 +6,7 @@ import {
   AddDebtorAction,
   DebtorsActionTypes,
   GetDebtorsAction,
-  RemoveDebtorsAction,
+  RemoveDebtorsAction, SetDebtorAction,
   SetDebtorsAction
 } from '../actions/debtors.action';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
@@ -46,11 +46,22 @@ export class DebtorsEffects {
     })
   );
 
-  @Effect({dispatch: false})
-  public addDebtors$: Observable<DebtorsResponse> = this.actions$.pipe(
+  @Effect()
+  public addDebtors$: Observable<SetDebtorAction> = this.actions$.pipe(
     ofType(DebtorsActionTypes.ADD_DEBTOR),
     switchMap((action: AddDebtorAction) => {
-       return this.debtorsService.setDebtor(action.debtor);
+      return this.debtorsService.setDebtor(action.debtor);
+    }),
+    switchMap((debtor: DebtorsResponse) => {
+      return [new SetDebtorAction(debtor)];
     })
   );
+
+  @Effect({dispatch: false})
+  public serDebtor$: Observable<SetDebtorAction> = this.actions$.pipe(
+    ofType(DebtorsActionTypes.SET_DEBTOR),
+    tap( (action: SetDebtorAction) => {
+      console.log('set_debtor', action);
+    })
+  )
 }

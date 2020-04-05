@@ -1,11 +1,16 @@
 <ng-container *ngIf="debtorsLoading$| async">
-  <h1>Loading</h1>
+  <div class="row justify-content-center mt-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  </div>
 </ng-container>
 
 <ng-container *ngIf="!(debtorsLoading$| async)">
   <ng-container *ngIf="debtors.length; else notDebtors">
     <div class="card mb-3 p-2"
-         *ngFor="let debtor of debtors | searchDebtors:searchService.search">
+         *ngFor="let debtor of debtors | searchDebtors:searchService.search"
+    >
       <div class="row no-gutters">
         <div class="col-md-3">
           <img
@@ -19,13 +24,18 @@
               Номер телефона: {{debtor.tNumber}} <br>
               Email: {{debtor.email}}
             </p>
-            <p class="card-text"><small class="text-muted">Дата возврата: {{debtor.dateOfPayment | date}}</small></p>
+            <p class="card-text">
+              <small class="text-muted">
+                Дата возврата: {{debtor.dateOfPayment | date:'dd MMM yyyy'}}
+              </small>
+            </p>
           </div>
         </div>
         <div class="col-md-2">
           <button type="button" class="btn btn-primary mt-3"
                   *ngIf="debtor.status === 1"
-                  (click)="editStatus(debtor._id,2)">
+                  (click)="editStatus(debtor._id,2)"
+          >
             {{debtor.amount}} <span class="badge badge-light">{{debtor.currency}}</span>
           </button>
           <button type="button" class="btn btn-success mt-3"
@@ -37,18 +47,7 @@
             <small class="text-muted" *ngIf="debtor.isI">Вы должны</small>
             <small class="text-muted" *ngIf="!debtor.isI">Вам должны</small>
           </div>
-          <div class="remove-btn">
-          <button
-            type="button"
-            class="btn btn-danger mt-3 position-absolute"
-            appRemoveBtn
-          >
-            Удалить
-          </button>
-            <button type="button" class="btn btn-outline-secondary mt-3" (click)="debtorRemove(debtor._id)">
-              ОК
-            </button>
-          </div>
+          <app-remove-btn-debtor className="mt-3" [id]="debtor._id"></app-remove-btn-debtor>
           <div class="text-center edit-btn">
             <small>редактировать</small>
           </div>
@@ -60,7 +59,7 @@
   <ng-template #notDebtors>
     <div class="alert alert-primary" role="alert">
       У вас нет долгов,
-      <a routerLink="/debtors/create" class="alert-link">
+      <a (click)="showModal($event)" class="alert-link">
         нажмите здесь для добавления
       </a>
     </div>

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {DebtorsService} from '../../services/debtors.service';
 import {DebtorsResponse} from '../../shared/interfaces';
@@ -10,6 +10,7 @@ import {AppState} from '../../core/store/state/app.state';
 import {GetDebtorsAction, RemoveDebtorsAction} from '../../core/store/actions/debtors.action';
 import {map, takeUntil} from 'rxjs/operators';
 import {DebtorsState} from '../../core/store/state/debtors.state';
+import {ModalShowService} from '../../services/modalShow.service';
 
 @Component({
   selector: 'app-debtors-list-page',
@@ -30,6 +31,7 @@ export class DebtorsListPageComponent implements OnInit, OnDestroy {
     public searchService: SearchService,
     public router: Router,
     public store: Store<AppState>,
+    private modalShowService: ModalShowService
   ) {
   }
 
@@ -50,9 +52,7 @@ export class DebtorsListPageComponent implements OnInit, OnDestroy {
     );
   }
 
-  public debtorRemove(id: string): void {
-    this.store.dispatch(new RemoveDebtorsAction(id));
-  }
+
 
   public editStatus(id: string, status: number): void {
     this.debtorsService.setStatus(id, status).subscribe(() => {
@@ -68,7 +68,8 @@ export class DebtorsListPageComponent implements OnInit, OnDestroy {
     this.destroy$.next();
   }
 
-  public showModal(): void {
-    this.modalOpen = !this.modalOpen;
+  public showModal(event: Event): void {
+    event.preventDefault();
+    this.modalShowService.showAsComponent();
   }
 }

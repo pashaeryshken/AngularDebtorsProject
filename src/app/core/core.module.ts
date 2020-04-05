@@ -12,10 +12,12 @@ import {UserEffect} from './store/effects/user.effect';
 import {reducerMap} from './store/state/app.state';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {DebtorsEffects} from './store/effects/debtors.effects';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [MainLayoutComponent],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     SharedModule,
     LoginModule,

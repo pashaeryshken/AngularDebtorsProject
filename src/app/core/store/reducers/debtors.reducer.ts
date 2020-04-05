@@ -15,6 +15,9 @@ export const debtorsReducer: ActionReducer<DebtorsState> =
       case DebtorsActionTypes.ADD_DEBTOR: {
         return {...state};
       }
+      case DebtorsActionTypes.SET_DEBTOR: {
+        return {...state, debtors: [...state.debtors, action.debtor]};
+      }
       case DebtorsActionTypes.REMOVE_DEBTORS: {
         return {...state, debtors: [...state.debtors].filter( (debtor) => debtor._id !== action.id)};
       }

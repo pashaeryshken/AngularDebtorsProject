@@ -55,9 +55,9 @@
 </div>
 
 
-<app-modal-component [isShow]="isShow" (close)="showModal()"></app-modal-component>
+<!--<app-modal-component (close)="modalShowService.showAsComponent()"></app-modal-component>-->
 
-<div class="btn-create" (click)="showModal()">
+<div class="btn-create" (click)="modalShowService.showAsComponent()">
   <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
        viewBox="0 0 512 512">
     <path d="M256,0C114.833,0,0,114.833,0,256s114.833,256,256,256s256-114.853,256-256S397.167,0,256,0z M256,472.341

@@ -18,12 +18,6 @@ const routes: Routes = [
         loadChildren: () => import('../features/sign-page/sign-page.module').then(mod => mod.SignPageModule)
       },
       {
-        path: 'debtors/create',
-        loadChildren: () => import('../features/create-debtor-page/create-debtor-page.module')
-          .then(mod => mod.CreateDebtorPageModule),
-        canActivate: [AuthGuard]
-      },
-      {
         path: '', component: NavbarComponent, children: [
           {path: '', redirectTo: '/debtors', pathMatch: 'full'},
           {
