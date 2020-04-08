@@ -29,6 +29,21 @@ export interface DebtorsResponse {
   amount: number;
 }
 
+export interface UpdateDebtor {
+  avatar?: string;
+  email?: string;
+  date?: Date;
+  dateOfPayment?: Date;
+  status?: number;
+  address?: string;
+  tNumber?: string;
+  currency?: string;
+  id: string;
+  isI?: boolean;
+  name?: string;
+  amount?: number;
+}
+
 export interface UserData {
   email: string;
   userName: string;

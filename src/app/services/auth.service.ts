@@ -19,7 +19,7 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  private handleError(error: HttpErrorResponse): Observable<any> {
+  private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
     if (!!error.error.message) {
       this.error$.next('Введите корректные данные');
     }

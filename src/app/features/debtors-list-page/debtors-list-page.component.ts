@@ -7,7 +7,7 @@ import {SearchService} from '../../services/search.service';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/store/state/app.state';
-import {GetDebtorsAction, RemoveDebtorsAction} from '../../core/store/actions/debtors.action';
+import {GetDebtorsAction, RemoveDebtorsAction, UpdateDebtorsAction} from '../../core/store/actions/debtors.action';
 import {map, takeUntil} from 'rxjs/operators';
 import {DebtorsState} from '../../core/store/state/debtors.state';
 import {ModalShowService} from '../../services/modalShow.service';
@@ -31,7 +31,7 @@ export class DebtorsListPageComponent implements OnInit, OnDestroy {
     public searchService: SearchService,
     public router: Router,
     public store: Store<AppState>,
-    private modalShowService: ModalShowService
+    public modalShowService: ModalShowService
   ) {
   }
 
@@ -50,18 +50,6 @@ export class DebtorsListPageComponent implements OnInit, OnDestroy {
         return state.debtorsLoading;
       })
     );
-  }
-
-
-
-  public editStatus(id: string, status: number): void {
-    this.debtorsService.setStatus(id, status).subscribe(() => {
-      this.debtors.find(debtor => id === debtor._id).status = status;
-    });
-  }
-
-  public openDebtor(id: string): void {
-    this.router.navigate(['/debtors', id]);
   }
 
   public ngOnDestroy(): void {

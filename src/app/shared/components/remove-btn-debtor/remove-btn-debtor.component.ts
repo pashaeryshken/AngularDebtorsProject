@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DebtorsService} from '../../../services/debtors.service';
 import {RemoveDebtorsAction} from '../../../core/store/actions/debtors.action';
 import {Store} from '@ngrx/store';
@@ -13,6 +13,7 @@ export class RemoveBtnDebtorComponent implements OnInit {
 
   @Input('id') public debtorId: string;
   @Input('className') public className: string;
+  @Output() public remove: EventEmitter<null> = new EventEmitter();
 
   constructor(private debtorsService: DebtorsService, private store: Store, private router: Router) {
   }
@@ -20,11 +21,8 @@ export class RemoveBtnDebtorComponent implements OnInit {
   public ngOnInit(): void {
   }
 
-  public debtorRemove(id: string): void {
-      this.store.dispatch(new RemoveDebtorsAction(id));
-      if (this.router.url !== '/debtors') {
-      this.router.navigate(['/debtors']);
-    }
+  public removeDebtor(): void {
+    this.remove.emit();
   }
 
 }

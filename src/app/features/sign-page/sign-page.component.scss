@@ -12,3 +12,28 @@ div{
     border: 1px solid rgba(139, 0, 0, 1);
   }
 }
+
+.container-warning{
+  box-shadow: 0 0 10px rgba(139, 0, 0, 1);
+}
+
+.form-danger{
+  text-align: center;
+  color: rgba(139, 0, 0, 1);
+  font-weight: 600;
+}
+
+.form-title{
+  margin-bottom: 0;
+  font-size: 30px;
+  text-align: center;
+  color: #7f7f7f;
+}
+
+.form-group{
+  margin-bottom: 0;
+
+  & label{
+    margin-bottom: 0;
+  }
+}

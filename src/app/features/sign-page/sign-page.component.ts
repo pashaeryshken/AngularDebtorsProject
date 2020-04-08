@@ -15,7 +15,7 @@ export class SignPageComponent implements OnInit {
   public signForm: FormGroup;
   public isSubmit: boolean = false;
 
-  constructor(private sign: SignService, private router: Router) {
+  constructor(public sign: SignService, private router: Router) {
   }
 
   public ngOnInit(): void {

@@ -8,4 +8,4 @@ export interface UserState {
 export const initialUserState: UserState = {
   user: null,
   userLoading: false
-}
+};

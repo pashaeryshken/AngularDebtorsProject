@@ -22,6 +22,11 @@ export class SearchPipe implements PipeTransform {
         return debtor.name.trim().toLowerCase().includes(search.searchStr.toLowerCase().trim());
       });
     }
-    return debtors;
+
+    return debtors.slice()
+      .sort((a, b) => {
+        return  b.status - a.status;
+      })
+      .reverse();
   }
 }

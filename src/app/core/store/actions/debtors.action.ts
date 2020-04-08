@@ -1,12 +1,13 @@
 import {Action} from '@ngrx/store';
-import {DebtorsResponse} from '../../../shared/interfaces';
+import {DebtorsResponse, UpdateDebtor} from '../../../shared/interfaces';
 
 export enum DebtorsActionTypes {
   GET_DEBTORS = 'GET_DEBTORS',
   SET_DEBTORS = 'SET_DEBTORS',
   SET_DEBTOR = 'SET_DEBTOR',
   REMOVE_DEBTORS = 'REMOVE_DEBTORS',
-  ADD_DEBTOR = 'ADD_DEBTOR'
+  ADD_DEBTOR = 'ADD_DEBTOR',
+  UPDATE_DEBTOR = 'UPDATE_DEBTOR'
 }
 
 export class GetDebtorsAction implements Action {
@@ -15,25 +16,41 @@ export class GetDebtorsAction implements Action {
 
 export class SetDebtorsAction implements Action {
   public type: DebtorsActionTypes.SET_DEBTORS = DebtorsActionTypes.SET_DEBTORS;
+
   constructor(public debtors: DebtorsResponse[]) {
   }
 }
+
 export class AddDebtorAction implements Action {
   public type: DebtorsActionTypes.ADD_DEBTOR = DebtorsActionTypes.ADD_DEBTOR;
+
   constructor(public debtor: DebtorsResponse | FormData) {
   }
 }
 
 export class SetDebtorAction implements Action {
   public type: DebtorsActionTypes.SET_DEBTOR = DebtorsActionTypes.SET_DEBTOR;
+
   constructor(public debtor: DebtorsResponse) {
   }
 }
 
 export class RemoveDebtorsAction implements Action {
   public type: DebtorsActionTypes.REMOVE_DEBTORS = DebtorsActionTypes.REMOVE_DEBTORS;
+
   constructor(public id: string) {
   }
 }
 
-export type DebtorsAction = GetDebtorsAction | SetDebtorsAction | AddDebtorAction | RemoveDebtorsAction | SetDebtorAction;
+export class UpdateDebtorsAction implements Action {
+  public type: DebtorsActionTypes.UPDATE_DEBTOR = DebtorsActionTypes.UPDATE_DEBTOR;
+  constructor(public debtor: UpdateDebtor) {
+  }
+}
+
+export type DebtorsAction = GetDebtorsAction
+                          | SetDebtorsAction
+                          | AddDebtorAction
+                          | RemoveDebtorsAction
+                          | SetDebtorAction
+                          | UpdateDebtorsAction;

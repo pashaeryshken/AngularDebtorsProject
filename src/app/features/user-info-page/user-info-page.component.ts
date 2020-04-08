@@ -47,11 +47,7 @@ export class UserInfoPageComponent implements OnInit {
   }
 
   public navigate(isI: boolean): void {
-    this.router.navigate(['/debtors'], {
-      queryParams: {
-        isI: isI
-      }
-    });
+    this.router.navigate(['/debtors']);
     this.searchService.searchFilter = isI.toString();
     this.searchService.isSearch = true;
   }

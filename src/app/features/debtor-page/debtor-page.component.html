@@ -18,12 +18,12 @@
     </p>
     <div class="btn-block">
       <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" (click)="showDropDown()">Внести</button>
-
-        <div class="dropdown-menu" [ngClass]="{show: isShowDropDown}">
+        <button type="button" class="btn btn-secondary dropdown-toggle" (mouseenter)="showDropDown()"
+        >Внести</button>
+        <div class="dropdown-menu" [ngClass]="{show: isShowDropDown}" (mouseleave)="showDropDown()">
           <a class="dropdown-item" href="#">Внести все</a>
           <a class="dropdown-item" href="#">Внести часть</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Увеличить</a>
         </div>
       </div>
       <button class="btn btn-secondary ml-2">Редактировать</button>

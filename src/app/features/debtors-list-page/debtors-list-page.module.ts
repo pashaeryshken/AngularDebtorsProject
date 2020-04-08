@@ -4,10 +4,10 @@ import {CommonModule} from '@angular/common';
 import {SharedModule} from '../../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {ModalComponent} from '../../shared/components/modal/modal.component';
+import { CardDebtorComponent } from './components/card-debtor/card-debtor.component';
 
 @NgModule({
-  declarations: [DebtorsListPageComponent],
+  declarations: [DebtorsListPageComponent, CardDebtorComponent],
     imports: [
         CommonModule,
         SharedModule,

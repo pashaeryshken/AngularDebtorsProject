@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {DebtorsResponse} from '../shared/interfaces';
+import {DebtorsResponse, UpdateDebtor} from '../shared/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +30,8 @@ export class DebtorsService {
     });
   }
 
-  public setStatus(id: string, status: number): Observable<DebtorsResponse> {
-    console.log(id);
-    return this.http.put<DebtorsResponse>('http://localhost:3333/debtors/', {
-      id,
-      status: status
-    }, {
+  public UpdateDebtor(debtor: UpdateDebtor): Observable<UpdateDebtor> {
+    return this.http.put<UpdateDebtor>('http://localhost:3333/debtors/', debtor, {
       headers: {
         token: localStorage.getItem('token')
       }
