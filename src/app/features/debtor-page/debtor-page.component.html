@@ -20,7 +20,7 @@
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" (mouseenter)="showDropDown()"
         >Внести</button>
-        <div class="dropdown-menu" [ngClass]="{show: isShowDropDown}" (mouseleave)="showDropDown()">
+        <div class="dropdown-menu show" *ngIf="isShowDropDown" (mouseleave)="showDropDown()" @dropDown>
           <a class="dropdown-item" href="#">Внести все</a>
           <a class="dropdown-item" href="#">Внести часть</a>
           <a class="dropdown-item" href="#">Увеличить</a>

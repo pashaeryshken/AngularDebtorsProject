@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DebtorsResponse, UpdateDebtor} from '../shared/interfaces';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,11 @@ import {DebtorsResponse, UpdateDebtor} from '../shared/interfaces';
 
 export class DebtorsService {
 
-
   constructor(private http: HttpClient) {
   }
 
   public getDebtors(): Observable<DebtorsResponse[]> {
-    return this.http.get<DebtorsResponse[]>('http://localhost:3333/debtors/', {
+    return this.http.get<DebtorsResponse[]>(`${environment.http}/debtors/`, {
       headers: {
         token: localStorage.getItem('token')
       }
@@ -23,7 +23,7 @@ export class DebtorsService {
 
   public removeDebtor(id: string): Observable<null> {
     console.log(id);
-    return this.http.delete<null>(`http://localhost:3333/debtors/${id}`, {
+    return this.http.delete<null>(`${environment.http}/debtors/${id}`, {
       headers: {
         token: localStorage.getItem('token')
       }
@@ -31,7 +31,7 @@ export class DebtorsService {
   }
 
   public UpdateDebtor(debtor: UpdateDebtor): Observable<UpdateDebtor> {
-    return this.http.put<UpdateDebtor>('http://localhost:3333/debtors/', debtor, {
+    return this.http.put<UpdateDebtor>(`${environment.http}/debtors/`, debtor, {
       headers: {
         token: localStorage.getItem('token')
       }
@@ -39,15 +39,15 @@ export class DebtorsService {
   }
 
   public setDebtor(debtor: FormData | DebtorsResponse): Observable<DebtorsResponse> {
-    return this.http.post<DebtorsResponse>('http://localhost:3333/debtors/create', debtor, {
+    return this.http.post<DebtorsResponse>(`${environment.http}/debtors/create`, debtor, {
       headers: {
         token: localStorage.getItem('token')
       }
     });
   }
 
-  public getDebtor(id): Observable<DebtorsResponse>{
-    return this.http.get<DebtorsResponse>(`http://localhost:3333/debtors/${id}`, {
+  public getDebtor(id: number): Observable<DebtorsResponse> {
+    return this.http.get<DebtorsResponse>(`${environment.http}/debtors/${id}`, {
       headers: {
         token: localStorage.getItem('token')
       }

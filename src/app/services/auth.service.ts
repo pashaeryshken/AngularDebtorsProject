@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {AuthResponse, User, UserData} from '../shared/interfaces';
 import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class AuthService {
   private refreshToken(): Observable<AuthResponse> {
     console.log('refreshToken');
     const token: string = localStorage.getItem('token');
-    return this.http.get<AuthResponse>('http://localhost:3333/users/refresh-token', {
+    return this.http.get<AuthResponse>(`${environment.http}/users/refresh-token`, {
       headers: {
         token
       }
@@ -41,7 +42,7 @@ export class AuthService {
 
   public login(user: User): Observable<AuthResponse> {
     user.email = user.email.trim();
-    return this.http.post<AuthResponse>('http://localhost:3333/users/login', user)
+    return this.http.post<AuthResponse>(`${environment.http}/users/login`, user)
       .pipe(
         tap(this.setToken),
         catchError(this.handleError.bind(this))
@@ -84,7 +85,7 @@ export class AuthService {
 
   public userData(): Observable<UserData> {
     const token: string = localStorage.getItem('token');
-    return this.http.get<UserData>('http://localhost:3333/users/', {
+    return this.http.get<UserData>(`${environment.http}/users/`, {
       headers: {
         token
       }

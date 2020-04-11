@@ -1,6 +1,4 @@
 import {Injectable} from '@angular/core';
-import {ModalComponent} from '../shared/components/modal/modal.component';
-import {NgElement, WithProperties} from '@angular/elements';
 
 @Injectable({providedIn: 'root'})
 export class ModalShowService {
@@ -8,8 +6,8 @@ export class ModalShowService {
   }
 
   public showAsComponent(): void {
-    const popupEl: NgElement & WithProperties<ModalComponent> =
-      document.createElement('app-modal-component') as NgElement & WithProperties<ModalComponent>;
+    const popupEl: HTMLElement =
+      document.createElement('app-modal-component');
     popupEl.addEventListener('closed', () => document.body.removeChild(popupEl));
     document.body.appendChild(popupEl);
   }

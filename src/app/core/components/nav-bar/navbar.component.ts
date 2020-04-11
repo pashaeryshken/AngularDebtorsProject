@@ -18,10 +18,12 @@ export class NavbarComponent implements OnInit {
               public router: Router,
               public modalShowService: ModalShowService,
               public injector: Injector,
-              ) {
+  ){
 
     const POPUP_ELEMENT: NgElementConstructor<ModalComponent> = createCustomElement(ModalComponent, {injector});
-    customElements.define('app-modal-component', POPUP_ELEMENT);
+    if (!customElements.get('app-modal-component')) {
+      customElements.define('app-modal-component', POPUP_ELEMENT);
+    }
   }
 
   public ngOnInit(): void {

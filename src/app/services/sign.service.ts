@@ -4,6 +4,7 @@ import {Observable, Subject, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {catchError, tap} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class SignService {
   }
 
   public sign(signData: SignData): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>('http://localhost:3333/users/signup', signData)
+    return this.http.post<AuthResponse>(`${environment.http}/users/signup`, signData)
       .pipe(
         tap(this.auth.setToken),
         catchError(this.handleError.bind(this))

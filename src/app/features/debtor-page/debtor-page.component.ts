@@ -2,11 +2,21 @@ import {Component, OnInit} from '@angular/core';
 import {DebtorsService} from '../../services/debtors.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {DebtorsResponse} from '../../shared/interfaces';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-debtor-page',
   templateUrl: './debtor-page.component.html',
-  styleUrls: ['./debtor-page.component.scss']
+  styleUrls: ['./debtor-page.component.scss'],
+  animations: [
+    trigger('dropDown' , [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate(200),
+      ]),
+      transition(':leave', animate(200, style({opacity: 0}))),
+    ])
+  ]
 })
 export class DebtorPageComponent implements OnInit {
 
