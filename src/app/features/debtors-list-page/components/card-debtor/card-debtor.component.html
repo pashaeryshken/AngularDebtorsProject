@@ -2,15 +2,15 @@
   <div class="row no-gutters">
     <div class="col-md-3">
       <img
-        [src]="debtor.avatar ? debtor.avatar : '../../../assets/images.png'"
+        [src]="debtor.people.avatar ? debtor.people.avatar : '../../../assets/images.png'"
         class="card-img">
     </div>
     <div class="col-md-6">
       <div class="card-body" align="left">
-        <h5 class="card-title" (click)="openDebtor(debtor._id)">{{debtor.name}}</h5>
+        <h5 class="card-title" (click)="openDebtor(debtor._id)">{{debtor.people.name}}</h5>
         <p class="card-text">
-          Номер телефона: {{debtor.tNumber}} <br>
-          Email: {{debtor.email}}
+          Номер телефона: {{debtor.people.tNumber}} <br>
+          Email: {{debtor.people.email}}
         </p>
         <p class="card-text">
           <small class="text-muted">

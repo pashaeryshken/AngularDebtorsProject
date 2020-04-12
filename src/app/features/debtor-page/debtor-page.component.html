@@ -1,15 +1,15 @@
 <div class="row" *ngIf="debtor">
   <div class="col-md-4">
     <img
-      [src]="debtor.avatar ? debtor.avatar : '../../../assets/images.png'"
+      [src]="debtor.people.avatar ? debtor.people.avatar : '../../../assets/images.png'"
       class="card-img">
   </div>
   <div class="col-md-7">
-    <h5 class="card-title">{{debtor.name}}</h5>
+    <h5 class="card-title">{{debtor.people.name}}</h5>
     <p class="card-text">
-      Номер телефона: {{debtor.tNumber}} <br>
-      Email: {{debtor.email}}<br>
-      Адрес: {{debtor.address}}
+      Номер телефона: {{debtor.people.tNumber}} <br>
+      Email: {{debtor.people.email}}<br>
+      Адрес: {{debtor.people.address}}
     </p>
     <p class="card-text">
       <small class="text-muted">

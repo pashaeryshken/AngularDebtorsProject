@@ -38,7 +38,7 @@ export class DebtorsService {
     });
   }
 
-  public setDebtor(debtor: FormData | DebtorsResponse): Observable<DebtorsResponse> {
+  public setDebtor(debtor: DebtorsResponse): Observable<DebtorsResponse> {
     return this.http.post<DebtorsResponse>(`${environment.http}/debtors/create`, debtor, {
       headers: {
         token: localStorage.getItem('token')

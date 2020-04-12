@@ -15,32 +15,24 @@ export interface SignData {
 }
 
 export interface DebtorsResponse {
-  avatar?: string;
-  email: string;
+  people: People;
   date: Date;
   dateOfPayment: Date;
   status: number;
-  address: string;
-  tNumber: string;
   currency: string;
   _id?: string;
   isI: boolean;
-  name: string;
   amount: number;
+  peopleId?: string;
 }
 
 export interface UpdateDebtor {
-  avatar?: string;
-  email?: string;
   date?: Date;
   dateOfPayment?: Date;
   status?: number;
-  address?: string;
-  tNumber?: string;
   currency?: string;
   id: string;
   isI?: boolean;
-  name?: string;
   amount?: number;
 }
 
@@ -55,4 +47,13 @@ export interface UserToken {
   token: string;
   tokenExp: string;
   TokenRefresh: string;
+}
+
+export interface People {
+  _id?: string;
+  email: string;
+  name: string;
+  address: string;
+  tNumber: string;
+  avatar: string;
 }

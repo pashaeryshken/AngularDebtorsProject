@@ -19,7 +19,7 @@ export class SearchPipe implements PipeTransform {
 
     if (search.searchStr.trim() !== '') {
       debtors = debtors.filter((debtor) => {
-        return debtor.name.trim().toLowerCase().includes(search.searchStr.toLowerCase().trim());
+        return debtor.people.name.trim().toLowerCase().includes(search.searchStr.toLowerCase().trim());
       });
     }
 

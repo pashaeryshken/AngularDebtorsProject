@@ -22,12 +22,9 @@ export class DebtorsListPageComponent implements OnInit, OnDestroy {
   public debtors: DebtorsResponse[] = [];
   public destroy$: Subject<void> = new Subject();
   public debtorsLoading$: Observable<boolean>;
-  public modalOpen: boolean = false;
   @Input() public searchStr: string;
 
   constructor(
-    private auth: AuthService,
-    private debtorsService: DebtorsService,
     public searchService: SearchService,
     public router: Router,
     public store: Store<AppState>,

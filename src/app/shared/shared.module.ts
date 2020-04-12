@@ -10,6 +10,7 @@ import {RemoveBtnDirective} from './directives/remove-btn/remove-btn.directive';
 import {ModalComponent} from './components/modal/modal.component';
 import { RemoveBtnDebtorComponent } from './components/remove-btn-debtor/remove-btn-debtor.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { DropdownPeopleListComponent } from './components/modal/dropdown-people-list/dropdown-people-list.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     RemoveBtnDirective,
     ModalComponent,
     RemoveBtnDebtorComponent,
+    DropdownPeopleListComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,17 @@
+<div class="dropdown mb-3">
+  <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
+         placeholder="Выбрать из списка..."
+         aria-describedby="emailHelp" (focus)="showDropdown()" >
+  <div [ngClass]="{'modal-backdrop': isShowDropdown}" (click)="showDropdown()"></div>
+  <div class="dropdown-menu" [ngClass]="{'show': isShowDropdown && peoples}">
+    <div class="dropdown-item col-md-12"
+         *ngFor="let people of peoples"
+         (click)="emitPeopleId(people._id)"
+         >
+      <div class="img-people">
+        <img [src]="people.avatar" alt="" >
+      </div>
+      <p class="people-title">{{people.name}}</p>
+    </div>
+  </div>
+</div>

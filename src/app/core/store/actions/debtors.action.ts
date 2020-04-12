@@ -24,7 +24,7 @@ export class SetDebtorsAction implements Action {
 export class AddDebtorAction implements Action {
   public type: DebtorsActionTypes.ADD_DEBTOR = DebtorsActionTypes.ADD_DEBTOR;
 
-  constructor(public debtor: DebtorsResponse | FormData) {
+  constructor(public debtor: DebtorsResponse) {
   }
 }
 

@@ -27,6 +27,12 @@ const routes: Routes = [
             canActivate: [AuthGuard]
           },
           {
+            path: 'peoples',
+            loadChildren: () => import('../features/people-list-page/people-list-page.module')
+              .then(mod => mod.PeopleListPageModule),
+            canActivate: [AuthGuard]
+          },
+          {
             path: 'debtors',
             loadChildren: () => import('../features/debtors-list-page/debtors-list-page.module')
               .then(mod => mod.DebtorsListPageModule),
