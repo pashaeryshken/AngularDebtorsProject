@@ -37,7 +37,7 @@
     "no-arg": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
-    "no-consecutive-blank-lines": [true, 1],
+    "no-consecutive-blank-lines": [true, 5],
     "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
     "no-inferrable-types": [true, "ignore-params", "ignore-properties"],
     "no-construct": true,

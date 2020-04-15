@@ -1,19 +1,12 @@
 import {
-  Component, EventEmitter, OnChanges,
-  OnInit, Output,
-  Renderer2, SimpleChanges, ViewChild
+  Component, EventEmitter, OnDestroy,
+  OnInit, Output, ViewChild
 } from '@angular/core';
-import {DebtorsService} from '../../../services/debtors.service';
-import {Router} from '@angular/router';
-import {DatePipe} from '@angular/common';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../../core/store/state/app.state';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { People} from '../../interfaces';
-import {AddDebtorAction} from '../../../core/store/actions/debtors.action';
-import { Observable} from 'rxjs';
+import {DebtorsResponse, People} from '../../interfaces';
+import {Observable, Subject} from 'rxjs';
 import {CreatePeopleFormComponent} from './create-people-form/create-people-form.component';
-import {CustomValidators} from '../../custom.validators';
+import {CreateDebtorFormComponent} from './create-debtor-form/create-debtor-form.component';
+import {ModalShowService} from '../../../services/modalShow.service';
 
 @Component({
   selector: 'app-modal-component',
@@ -21,38 +14,25 @@ import {CustomValidators} from '../../custom.validators';
   styleUrls: ['./modal.component.scss'],
 })
 
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnDestroy {
+
+  private destroy$: Subject<void> = new Subject();
 
   @Output() public closed: EventEmitter<string> = new EventEmitter<string>();
   @ViewChild(CreatePeopleFormComponent) public peopleForm: CreatePeopleFormComponent;
-  public createDebtorsForm: FormGroup;
+  @ViewChild(CreateDebtorFormComponent) public debtorForm: CreateDebtorFormComponent;
   public people: People;
+  public debtor: DebtorsResponse;
   public peopleEdit: boolean = false;
-  public dateNow: string = this.datePipe.transform(Date.now(), 'yyyy-MM-dd');
   public file: File;
-  public formValid: boolean = false;
-  public currencyState: object = [
-    'BYN',
-    'USD',
-    'RUB',
-    'PLZ',
-  ];
+  public formPeopleValid: boolean = false;
+  public formDebtorValid: boolean = true;
 
-  constructor(private renderer: Renderer2,
-              private debtorsService: DebtorsService,
-              private router: Router,
-              private datePipe: DatePipe,
-              private store: Store<AppState>
-  ) {
-    this.createDebtorsForm = new FormGroup({
-      date: new FormGroup({
-        dateStart: new FormControl(this.dateNow),
-        dateEnd: new FormControl(this.dateNow),
-      }, CustomValidators.dateValidate),
-      amount: new FormControl(1, [Validators.required]),
-      currency: new FormControl(this.currencyState[0]),
-      isI: new FormControl('false')
-    });
+  constructor(private popup: ModalShowService) {
+    if (this.popup.editableDebtor) {
+      this.debtor = this.popup.editableDebtor;
+      this.people = this.popup.editableDebtor.people;
+    }
   }
 
   private getPeopleId(): Observable<string> {
@@ -64,20 +44,17 @@ export class ModalComponent implements OnInit {
     return this.peopleForm.submit();
   }
 
-  public ngOnInit(): void {
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.popup.editableDebtor = null;
+    this.debtor = null;
+    this.people = null;
   }
 
-  public close(): void {
-    this.clear();
-    setTimeout(() => {
-      this.closed.emit();
-    }, 150);
-
-  }
 
   public submit(): void {
     this.getPeopleId().subscribe((peopleId: string) => {
-      this.store.dispatch(new AddDebtorAction({...this.createDebtorsForm.value, peopleId}));
+      this.debtorForm.submit(peopleId);
       this.close();
     });
   }
@@ -86,31 +63,39 @@ export class ModalComponent implements OnInit {
     if (this.peopleForm) {
       this.peopleForm.clearForm();
     }
-    this.createDebtorsForm.reset({
-      date: {
-        dateStart: this.dateNow,
-        dateEnd: this.dateNow,
-      },
-      amount: 1,
-      currency: this.currencyState[0],
-      isI: 'false'
-    });
+    this.debtorForm.clearForm();
   }
+
+  public close(): void {
+    this.clear();
+    setTimeout(() => {
+      this.closed.emit();
+    }, 150);
+  }
+
 
   public setPeople(people: People): void {
     this.people = people;
     this.peopleEdit = false;
   }
+
+  public editPerson(): void {
+    this.peopleEdit = true;
+    this.formPeopleValid = true;
+  }
+
   public removePeople(): void {
     this.people = null;
   }
 
-  public validPeopleForm(event: boolean): void  {
-    this.formValid = event;
+  public validPeopleForm(event: boolean): void {
+    this.formPeopleValid = event;
   }
 
-  public editPerson(): void {
-    this.peopleEdit = true;
-    this.formValid = true;
+
+  public validDebtorForm(event: boolean): void {
+    this.formDebtorValid = event;
   }
+
+
 }

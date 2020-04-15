@@ -1,8 +1,20 @@
-import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  Renderer2,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {FormControl, FormGroup, RequiredValidator, Validators} from '@angular/forms';
 import {People} from '../../../interfaces';
 import {PeopleService} from '../../../../services/people.service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {PhoneCodesEnum} from '../../../../enums/phone-codes.enum';
 
@@ -11,11 +23,14 @@ import {PhoneCodesEnum} from '../../../../enums/phone-codes.enum';
   templateUrl: './create-people-form.component.html',
   styleUrls: ['./create-people-form.component.scss']
 })
-export class CreatePeopleFormComponent implements OnInit {
+export class CreatePeopleFormComponent implements OnInit, OnDestroy {
+
+  private subscription: Subscription;
 
   @ViewChild('avatar') public avatar: ElementRef;
   @Output() public validForm: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() public editablePerson: People;
+
   public isPhotoAdd: boolean = true;
   public filesName: string = '';
   public peopleForm: FormGroup;
@@ -52,9 +67,13 @@ export class CreatePeopleFormComponent implements OnInit {
       this.filesName = this.editablePerson.avatar;
       this.isPhotoAdd = false;
     }
-    this.peopleForm.statusChanges.subscribe(() => {
+    this.subscription = this.peopleForm.statusChanges.subscribe(() => {
       this.validForm.emit(this.peopleForm.valid);
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public addPhoto(event: FileList): void {

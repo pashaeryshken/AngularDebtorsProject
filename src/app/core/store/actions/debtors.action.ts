@@ -7,7 +7,8 @@ export enum DebtorsActionTypes {
   SET_DEBTOR = 'SET_DEBTOR',
   REMOVE_DEBTORS = 'REMOVE_DEBTORS',
   ADD_DEBTOR = 'ADD_DEBTOR',
-  UPDATE_DEBTOR = 'UPDATE_DEBTOR'
+  UPDATE_DEBTOR = 'UPDATE_DEBTOR',
+  SUCCESS_UPDATE_DEBTOR = 'SUCCESS_UPDATE_DEBTOR'
 }
 
 export class GetDebtorsAction implements Action {
@@ -44,7 +45,13 @@ export class RemoveDebtorsAction implements Action {
 
 export class UpdateDebtorsAction implements Action {
   public type: DebtorsActionTypes.UPDATE_DEBTOR = DebtorsActionTypes.UPDATE_DEBTOR;
-  constructor(public debtor: UpdateDebtor) {
+  constructor(public debtor: DebtorsResponse) {
+  }
+}
+
+export class SuccessUpdateDebtorsAction implements Action {
+  public type: DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR = DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR;
+  constructor(public debtor: DebtorsResponse) {
   }
 }
 
@@ -53,4 +60,5 @@ export type DebtorsAction = GetDebtorsAction
                           | AddDebtorAction
                           | RemoveDebtorsAction
                           | SetDebtorAction
-                          | UpdateDebtorsAction;
+                          | UpdateDebtorsAction
+                          | SuccessUpdateDebtorsAction;

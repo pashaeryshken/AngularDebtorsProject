@@ -54,7 +54,6 @@ export class PhoneMaskDirective implements OnInit, OnChanges, OnDestroy, Validat
 
   public ngOnInit(): void {
     this.mask = PhoneCodesEnum[this._phoneCode];
-    console.log('change');
     this.phoneValidate();
   }
 
@@ -81,11 +80,11 @@ export class PhoneMaskDirective implements OnInit, OnChanges, OnDestroy, Validat
           this.carriageEnd = this.renderer.selectRootElement('#tel').selectionEnd;
 
           if (data.length < preInputValue.length) {
-            this.maskSubstitution(newVal);
+            this.applyMask(newVal);
             this._phoneControl.setValue(this.newValueValid, {emitEvent: false});
             this.renderer.selectRootElement('#tel').setSelectionRange(this.carriageStart, this.carriageEnd);
           } else {
-            this.maskSubstitution(newVal);
+            this.applyMask(newVal);
             const removedD: string = data.charAt(this.carriageStart);
 
             if (preInputValue.length >= this.carriageStart) {
@@ -108,7 +107,7 @@ export class PhoneMaskDirective implements OnInit, OnChanges, OnDestroy, Validat
       });
   }
 
-  public maskSubstitution(newVal: string): void {
+  public applyMask(newVal: string): void {
     const newValArr: Array<string> = newVal.split('');
     const maskArr: Array<string> = this.mask.split('');
 

@@ -25,74 +25,15 @@
                          (close)="removePeople()"
         ></app-people-card>
 
-        <ng-container [formGroup]="createDebtorsForm">
-          <div class="form-row validate-date" formGroupName="date">
-            <div class="col-md-6 col-sm-6">
-              <label>Дата начала</label>
-              <input
-                type="date"
-                class="form-control"
-                formControlName="dateStart"
-              >
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <label>Дата возврата</label>
-              <input
-                type="date"
-                class="form-control"
-                formControlName="dateEnd"
-              >
-            </div>
-            <div class="error-block col-md-12">
-              <div
-                *ngIf="createDebtorsForm.get('date').errors && createDebtorsForm.get('date').touched"
-                class="alert-light pl-1 text-center"
-              >
-                <small *ngIf="createDebtorsForm.get('date').errors.inValidDate">
-                  Дата возврата не может быть меньше даты начала.
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-4 mb-3 col-sm-6">
-              <label for="amount" class="required-field validated">Сумма долга</label>
-              <input id="amount" type="number" min="1" class="form-control" formControlName="amount">
-            </div>
-
-            <div class="col-md-2 mb-3 col-sm-6">
-              <label for="currency">Валюта</label>
-              <select id="currency" class="custom-select" formControlName="currency">
-                <option *ngFor="let currency of currencyState" [ngValue]="currency">{{currency}}</option>
-              </select>
-            </div>
-
-            <div class="col-md-6 mb-4 mt-4" style="display: flex; justify-content: space-between">
-              <div class="btn-group btn-group-toggle col-md-12" data-toggle="buttons">
-                <label
-                  class="btn btn-outline-secondary"
-                  [ngClass]="{'active' : this.createDebtorsForm.get('isI').value === 'false'}"
-                >
-                  <input type="radio" name="isI" id="option1" formControlName="isI" value="false"> Мне должны
-                </label>
-
-                <label
-                  class="btn btn-outline-secondary"
-                  [ngClass]="{'active' : this.createDebtorsForm.get('isI').value === 'true'}"
-                >
-                  <input type="radio" name="isI" id="option2" formControlName="isI" value="true"> Я должен
-                </label>
-              </div>
-
-            </div>
-          </div>
-        </ng-container>
+        <app-create-debtor-form (validForm)="validDebtorForm($event)"
+                                [editableDebtor]="debtor"
+        ></app-create-debtor-form>
 
 
         <div class="form-row">
           <div class="col-md-6 ">
             <button class="btn btn-primary col-md-12" type="submit" (click)="submit()"
-                    [disabled]="!(formValid || !!people && createDebtorsForm.valid) "
+                    [disabled]="!((formPeopleValid || !!people) && formDebtorValid)"
             >Добавить</button>
           </div>
 

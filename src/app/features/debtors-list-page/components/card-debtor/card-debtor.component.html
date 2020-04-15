@@ -34,7 +34,7 @@
         Вернули
       </button>
       <app-remove-btn-debtor className="mt-2" [id]="debtor._id" (remove)="debtorRemove(debtor._id)"></app-remove-btn-debtor>
-      <app-edit-btn></app-edit-btn>
+      <app-edit-btn [debtor]="debtor"></app-edit-btn>
     </div>
   </div>
 </div>

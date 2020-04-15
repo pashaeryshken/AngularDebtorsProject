@@ -15,6 +15,7 @@ import {PeopleCardComponent} from './components/people-card/people-card.componen
 import {PhoneMaskDirective} from './directives/phone-mask/phone-mask.directive';
 import {IConfig, NgxMaskModule} from 'ngx-mask';
 import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
+import { CreateDebtorFormComponent } from './components/modal/create-debtor-form/create-debtor-form.component';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -32,6 +33,7 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     PeopleCardComponent,
     PhoneMaskDirective,
     EditBtnComponent,
+    CreateDebtorFormComponent
   ],
   imports: [
     CommonModule,
