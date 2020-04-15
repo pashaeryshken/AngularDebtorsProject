@@ -13,7 +13,7 @@ import {takeUntil} from 'rxjs/operators';
 })
 
 export class PeopleListPageComponent implements OnDestroy{
-  public people: People[];
+  public peoples: People[];
   public destroy$: Subject<void> = new Subject();
 
   constructor(private store: Store<AppState>) {
@@ -23,7 +23,7 @@ export class PeopleListPageComponent implements OnDestroy{
     }).pipe(
       takeUntil(this.destroy$)
     ).subscribe((peoples) => {
-      this.people = peoples;
+      this.peoples = peoples;
     });
   }
 

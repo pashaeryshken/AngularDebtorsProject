@@ -43,10 +43,6 @@ export class CardDebtorComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.store.dispatch(new RemoveDebtorsAction(id));
     }, 250);
-
-    if (this.router.url !== '/debtors') {
-      this.router.navigate(['/debtors']);
-    }
   }
 
   public ngOnDestroy(): void {

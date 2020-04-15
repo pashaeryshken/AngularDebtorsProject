@@ -4,7 +4,7 @@ import {DebtorsResponse} from '../interfaces';
 @Pipe({
   name: 'searchDebtors'
 })
-export class SearchPipe implements PipeTransform {
+export class SearchDebtorsPipe implements PipeTransform {
 
   public debtors: DebtorsResponse[];
 

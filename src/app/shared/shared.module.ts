@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {SearchPipe} from './pipes/search.pipe';
+import {SearchDebtorsPipe} from './pipes/search-debtors.pipe';
 import {NavbarComponent} from '../core/components/nav-bar/navbar.component';
 import {CommonModule, DatePipe} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -8,13 +8,19 @@ import {DragAndDropDirective} from './directives/drag-and-drop/drag-and-drop.dir
 import {CircleDiagramComponent} from '../features/user-info-page/circle-deagram/circle-diagram.component';
 import {RemoveBtnDirective} from './directives/remove-btn/remove-btn.directive';
 import {ModalComponent} from './components/modal/modal.component';
-import { RemoveBtnDebtorComponent } from './components/remove-btn-debtor/remove-btn-debtor.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { DropdownPeopleListComponent } from './components/modal/dropdown-people-list/dropdown-people-list.component';
+import {RemoveBtnDebtorComponent} from './components/remove-btn-debtor/remove-btn-debtor.component';
+import {DropdownPeopleListComponent} from './components/modal/dropdown-people-list/dropdown-people-list.component';
+import {CreatePeopleFormComponent} from './components/modal/create-people-form/create-people-form.component';
+import {PeopleCardComponent} from './components/people-card/people-card.component';
+import {PhoneMaskDirective} from './directives/phone-mask/phone-mask.directive';
+import {IConfig, NgxMaskModule} from 'ngx-mask';
+import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
+
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
   declarations: [
-    SearchPipe,
+    SearchDebtorsPipe,
     NavbarComponent,
     DragAndDropDirective,
     CircleDiagramComponent,
@@ -22,21 +28,28 @@ import { DropdownPeopleListComponent } from './components/modal/dropdown-people-
     ModalComponent,
     RemoveBtnDebtorComponent,
     DropdownPeopleListComponent,
+    CreatePeopleFormComponent,
+    PeopleCardComponent,
+    PhoneMaskDirective,
+    EditBtnComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(options)
   ],
   exports: [
-    SearchPipe,
+    SearchDebtorsPipe,
     NavbarComponent,
     DragAndDropDirective,
     CircleDiagramComponent,
     RemoveBtnDirective,
     ModalComponent,
-    RemoveBtnDebtorComponent
+    RemoveBtnDebtorComponent,
+    PeopleCardComponent,
+    EditBtnComponent
   ],
   providers: [DatePipe]
 })

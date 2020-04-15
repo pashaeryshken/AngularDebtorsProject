@@ -1,1 +1,3 @@
-<h3>peoples-works</h3>
+<ng-container *ngFor="let people of peoples">
+  <app-people-card [isList]="true" [people]="people"></app-people-card>
+</ng-container>

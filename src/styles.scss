@@ -20,6 +20,10 @@ a{
   text-decoration: none;
 }
 
+label{
+  margin: 0px;
+}
+
 header{
   padding: 0 25px;
   height: 10%;
@@ -81,11 +85,41 @@ form{
 }
 
 .error-block{
-  height: 25px;
+  height: 18px;
+  margin-bottom: 5px;
   & small{
     font-weight: 600;
     color: rgba(139, 0, 0, 1);
   }
+}
+
+.required-field{
+  &:after{
+    content: '*';
+    color: red;
+    margin-left: 3px;
+  }
+}
+
+.validated{
+  &.ng-invalid.ng-touched {
+    border: 1px solid rgba(139, 0, 0, 1);
+  }
+
+  &.ng-touched.ng-valid {
+    border: 1px solid green;
+  }
+}
+
+.form-control{
+  box-shadow: none;
+}
+
+.center{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
 
 
