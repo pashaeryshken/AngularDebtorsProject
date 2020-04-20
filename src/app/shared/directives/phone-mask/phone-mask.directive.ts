@@ -128,6 +128,6 @@ export class PhoneMaskDirective implements OnInit, OnChanges, OnDestroy, Validat
   }
 
   public validate(control: AbstractControl): ValidationErrors | null {
-    return (control.value.length !== this.mask.length) && control.value ? {noValidMask: {maskValid: true, mask: this.mask}} : null;
+    return control.value.length !== this.mask.length ? {noValidMask: {maskValid: true, mask: this.mask}} : null;
   }
 }

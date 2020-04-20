@@ -19,9 +19,5 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  },
-  "files": [
-    "./node_modules/@types/gapi/index.d.ts",
-    "./src/app/services/auth/auth-google.service.ts"
-  ]
+  }
 }

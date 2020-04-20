@@ -14,7 +14,6 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {DebtorsEffects} from './store/effects/debtors.effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PeopleEffects} from './store/effects/people.effects';
-import {DebtEffect} from './store/effects/debt.effect';
 
 @NgModule({
   declarations: [MainLayoutComponent],
@@ -27,7 +26,7 @@ import {DebtEffect} from './store/effects/debt.effect';
     FormsModule,
     CoreRoutingModule,
     StoreModule.forRoot(reducerMap),
-    EffectsModule.forRoot([UserEffect, DebtorsEffects, PeopleEffects, DebtEffect]),
+    EffectsModule.forRoot([UserEffect, DebtorsEffects, PeopleEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 10
     })
