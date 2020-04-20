@@ -7,10 +7,17 @@ import {
   DebtorsActionTypes,
   RemoveDebtorsAction, SetDebtorAction,
 <<<<<<< HEAD
+<<<<<<< HEAD
   SetDebtorsAction, UpdateDebtorsAction
 =======
   SetDebtorsAction, SuccessUpdateDebtorsAction, UpdateDebtorsAction
 >>>>>>> Revert "finaly commit"
+=======
+  SetDebtorsAction, SuccessUpdateDebtorsAction, UpdateDebtorsAction
+=======
+  SetDebtorsAction, UpdateDebtorsAction
+>>>>>>> master
+>>>>>>> 96afeac285079c809edf307dc86a1d169306c273
 } from '../actions/debtors.action';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {DebtorsResponse, UpdateDebtor} from '../../../shared/interfaces';
@@ -64,26 +71,45 @@ export class DebtorsEffects {
   public setDebtor$: Observable<SetDebtorAction> = this.actions$.pipe(
     ofType(DebtorsActionTypes.SET_DEBTOR),
 <<<<<<< HEAD
+<<<<<<< HEAD
     tap( (action: SetDebtorAction) => {
 =======
     tap((action: SetDebtorAction) => {
 >>>>>>> Revert "finaly commit"
+=======
+    tap((action: SetDebtorAction) => {
+=======
+    tap( (action: SetDebtorAction) => {
+>>>>>>> master
+>>>>>>> 96afeac285079c809edf307dc86a1d169306c273
       console.log('set_debtor', action);
     })
   );
 
   @Effect({dispatch: false})
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  public successUpdateDebtor$: Observable<SuccessUpdateDebtorsAction> = this.actions$.pipe(
+    ofType(DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR),
+    tap((action: SuccessUpdateDebtorsAction) => {
+      console.log('Set', action);
+=======
+>>>>>>> 96afeac285079c809edf307dc86a1d169306c273
   public updateDebtor$: Observable<UpdateDebtor> = this.actions$.pipe(
     ofType(DebtorsActionTypes.UPDATE_DEBTOR),
     switchMap( (action: UpdateDebtorsAction) => {
         return this.debtorsService.UpdateDebtor(action.debtor).pipe();
+<<<<<<< HEAD
 =======
   public successUpdateDebtor$: Observable<SuccessUpdateDebtorsAction> = this.actions$.pipe(
     ofType(DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR),
     tap((action: SuccessUpdateDebtorsAction) => {
       console.log('Set', action);
 >>>>>>> Revert "finaly commit"
+=======
+>>>>>>> master
+>>>>>>> 96afeac285079c809edf307dc86a1d169306c273
     })
   );
 }

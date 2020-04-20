@@ -1,5 +1,6 @@
 <div class="dropdown mb-3">
 <<<<<<< HEAD
+<<<<<<< HEAD
   <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
          placeholder="Выбрать из списка..."
          aria-describedby="emailHelp" (focus)="showDropdown()" >
@@ -17,17 +18,47 @@
        (click)="showDropdown()" @opacity></i>
   </div>
 >>>>>>> Revert "finaly commit"
+=======
+  <div class="input-search">
+    <input type="text" class="form-control form-control-sm input-select" id="exampleInputEmail1"
+           placeholder="Выбрать из списка..."
+           aria-describedby="emailHelp" (focus)="showDropdown()">
+    <i class="fas fa-times"
+       *ngIf="isShowDropdown"
+       (click)="showDropdown()"
+       @opacity></i>
+    <i class="fas fa-chevron-down"
+       *ngIf="!isShowDropdown"
+       (click)="showDropdown()" @opacity></i>
+  </div>
+=======
+  <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
+         placeholder="Выбрать из списка..."
+         aria-describedby="emailHelp" (focus)="showDropdown()" >
+>>>>>>> master
+>>>>>>> 96afeac285079c809edf307dc86a1d169306c273
   <div [ngClass]="{'modal-backdrop': isShowDropdown}" (click)="showDropdown()"></div>
   <div class="dropdown-menu" [ngClass]="{'show': isShowDropdown && peoples}">
     <div class="dropdown-item col-md-12"
          *ngFor="let people of peoples"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+         (click)="emitPeopleId(people)"
+    >
+      <div class="img-people">
+        <img [src]="people.avatar || '../../../../../assets/images.png'" alt="">
+      </div>
+      <p class="people-title">{{people.name}} <span class="text-muted">({{people.email}})</span></p>
+=======
+>>>>>>> 96afeac285079c809edf307dc86a1d169306c273
          (click)="emitPeopleId(people._id)"
          >
       <div class="img-people">
         <img [src]="people.avatar" alt="" >
       </div>
       <p class="people-title">{{people.name}}</p>
+<<<<<<< HEAD
 =======
          (click)="emitPeopleId(people)"
     >
@@ -36,6 +67,9 @@
       </div>
       <p class="people-title">{{people.name}} <span class="text-muted">({{people.email}})</span></p>
 >>>>>>> Revert "finaly commit"
+=======
+>>>>>>> master
+>>>>>>> 96afeac285079c809edf307dc86a1d169306c273
     </div>
   </div>
 </div>

@@ -36,6 +36,7 @@ export const debtorsReducer: ActionReducer<DebtorsState> =
             }
             return debtor;
 <<<<<<< HEAD
+<<<<<<< HEAD
           })};
       }
 
@@ -44,6 +45,16 @@ export const debtorsReducer: ActionReducer<DebtorsState> =
         };
       }
 >>>>>>> Revert "finaly commit"
+=======
+          }), debtorUpdate: false
+        };
+      }
+=======
+          })};
+      }
+
+>>>>>>> master
+>>>>>>> 96afeac285079c809edf307dc86a1d169306c273
       default:
         return state;
     }

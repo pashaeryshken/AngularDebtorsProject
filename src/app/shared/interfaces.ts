@@ -17,12 +17,21 @@ export interface SignData {
 export interface DebtorsResponse {
   people: People;
 <<<<<<< HEAD
+<<<<<<< HEAD
   date: Date;
   dateOfPayment: Date;
 =======
   dateStart: Date;
   dateEnd: Date;
 >>>>>>> Revert "finaly commit"
+=======
+  dateStart: Date;
+  dateEnd: Date;
+=======
+  date: Date;
+  dateOfPayment: Date;
+>>>>>>> master
+>>>>>>> 96afeac285079c809edf307dc86a1d169306c273
   status: number;
   currency: string;
   _id?: string;
@@ -33,12 +42,21 @@ export interface DebtorsResponse {
 
 export interface UpdateDebtor {
 <<<<<<< HEAD
+<<<<<<< HEAD
   date?: Date;
   dateOfPayment?: Date;
 =======
   dateStart?: Date;
   dateEnd?: Date;
 >>>>>>> Revert "finaly commit"
+=======
+  dateStart?: Date;
+  dateEnd?: Date;
+=======
+  date?: Date;
+  dateOfPayment?: Date;
+>>>>>>> master
+>>>>>>> 96afeac285079c809edf307dc86a1d169306c273
   status?: number;
   currency?: string;
   id: string;
