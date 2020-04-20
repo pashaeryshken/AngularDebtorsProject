@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../shared/interfaces';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
+import {from} from 'rxjs';
+import {AuthGoogleService} from '../../services/auth/auth-google.service';
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +16,8 @@ export class LoginPageComponent implements OnInit {
   public loginForm: FormGroup;
   public isSubmit: boolean = false;
 
-  constructor(public auth: AuthService, private router: Router) {
+  constructor(public auth: AuthService, private authGoogleService: AuthGoogleService, private router: Router, private ngZone: NgZone) {
+    this.authGoogleService.authInit();
   }
 
   public ngOnInit(): void {
@@ -25,6 +28,16 @@ export class LoginPageComponent implements OnInit {
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(6)])
+    });
+  }
+
+  public signInGoogle(): void {
+    this.isSubmit = true;
+    this.authGoogleService.googleSign().subscribe(() => {
+      this.isSubmit = false;
+      this.ngZone.run(() => this.router.navigate(['/debtors']).then()).then();
+    }, () => {
+      this.isSubmit = false;
     });
   }
 

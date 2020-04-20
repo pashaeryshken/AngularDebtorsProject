@@ -1,10 +1,8 @@
 import {Component, ElementRef, Injector, OnInit, ViewChild} from '@angular/core';
-import {SearchService} from '../../../services/search.service';
-import {createCustomElement, NgElement, NgElementConstructor} from '@angular/elements';
+import {SearchDebtorService} from '../../../services/search/search-debtor.service';
 import {Router} from '@angular/router';
-import {ModalShowService} from '../../../services/modalShow.service';
-import {ModalComponent} from '../../../shared/components/modal/modal.component';
-
+import {PopupShowService} from '../../../services/popupShow.service';
+import {SearchPeopleService} from '../../../services/search/search-people.service';
 @Component({
   selector: 'app-navbar-layout',
   templateUrl: './navbar.component.html',
@@ -14,32 +12,25 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('input') public input: ElementRef;
 
-  constructor(public searchService: SearchService,
+  constructor(public searchDebtService: SearchDebtorService,
               public router: Router,
-              public modalShowService: ModalShowService,
-              public injector: Injector,
-  ){
-
-    const POPUP_ELEMENT: NgElementConstructor<ModalComponent> = createCustomElement(ModalComponent, {injector});
-    if (!customElements.get('app-modal-component')) {
-      customElements.define('app-modal-component', POPUP_ELEMENT);
-    }
-  }
+              public modalShowService: PopupShowService,
+              public searchPeopleService: SearchPeopleService) {}
 
   public ngOnInit(): void {
   }
 
   public openSearch(event: Event): void {
     event.preventDefault();
-    this.searchService.isSearch = !this.searchService.isSearch;
+    this.searchDebtService.isSearch = !this.searchDebtService.isSearch;
   }
 
   public closeSearch(): void {
     setTimeout(() => {
-      if (this.searchService.isSearch) {
-        this.searchService.isSearch = false;
-        this.searchService.searchStr = '';
-        this.searchService.searchFilter = 'all';
+      if (this.searchDebtService.isSearch) {
+        this.searchDebtService.isSearch = false;
+        this.searchDebtService.searchStr = '';
+        this.searchDebtService.searchFilter = 'all';
         this.input.nativeElement.blur();
       }
     });

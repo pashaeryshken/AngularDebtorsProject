@@ -1,9 +1,9 @@
-import {DebtorsState, initialDebtorState} from '../state/debtors.state';
+import {DebtorsState, initialDebtorsState} from '../state/debtors.state';
 import {DebtorsAction, DebtorsActionTypes} from '../actions/debtors.action';
 import {ActionReducer} from '@ngrx/store';
 
 export const debtorsReducer: ActionReducer<DebtorsState> =
-  (state: DebtorsState = initialDebtorState, action: DebtorsAction): DebtorsState => {
+  (state: DebtorsState = initialDebtorsState, action: DebtorsAction): DebtorsState => {
     switch (action.type) {
 
       case DebtorsActionTypes.GET_DEBTORS: {
@@ -33,6 +33,18 @@ export const debtorsReducer: ActionReducer<DebtorsState> =
             return debtor;
           }), debtorUpdate: false
         };
+      }
+      case DebtorsActionTypes.UPDATE_DEBTOR_STATUS: {
+        return {...state, debtorUpdate: true};
+      }
+      case DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR_STATUS: {
+        const {id, status} = {...action.status};
+        return {...state, debtors: [...state.debtors].map((debtor) => {
+            if (debtor._id === id) {
+              return {...debtor, status};
+            }
+            return debtor;
+          }), debtorUpdate: false};
       }
       default:
         return {...state};

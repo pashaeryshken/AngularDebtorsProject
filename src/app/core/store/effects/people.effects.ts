@@ -64,12 +64,4 @@ export class PeopleEffects {
       console.log('set_debtor', action);
     })
   );
-
-  /*  @Effect({dispatch: false})
-    public updateDebtor$: Observable<UpdateDebtor> = this.actions$.pipe(
-      ofType(DebtorsActionTypes.UPDATE_DEBTOR),
-      switchMap( (action: UpdateDebtorsAction) => {
-        return this.debtorsService.UpdateDebtor(action.debtor).pipe();
-      })
-    );*/
 }

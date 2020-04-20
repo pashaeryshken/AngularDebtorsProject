@@ -16,24 +16,20 @@ export interface SignData {
 
 export interface DebtorsResponse {
   people: People;
-  dateStart: Date;
-  dateEnd: Date;
+  dateStart: string;
+  dateEnd: string;
   status: number;
   currency: string;
   _id?: string;
   isI: boolean;
   amount: number;
   peopleId?: string;
+  history?: DebtHistory[];
 }
 
-export interface UpdateDebtor {
-  dateStart?: Date;
-  dateEnd?: Date;
-  status?: number;
-  currency?: string;
+export interface UpdateStatusDebtor {
   id: string;
-  isI?: boolean;
-  amount?: number;
+  status: number;
 }
 
 export interface UserData {
@@ -56,4 +52,12 @@ export interface People {
   address: string;
   tNumber: string;
   avatar: string;
+}
+
+export interface DebtHistory {
+  _id?: string;
+  date?: string;
+  total: number;
+  currency: string;
+  status: number;
 }

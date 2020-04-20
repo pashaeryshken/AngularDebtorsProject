@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 import {SharedModule} from '../../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import { CardDebtorComponent } from './components/card-debtor/card-debtor.component';
+import { CardDebtorComponent } from '../../shared/components/card-debtor/card-debtor.component';
 
 @NgModule({
   declarations: [DebtorsListPageComponent, CardDebtorComponent],
