@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {SignService} from '../../services/auth/sign.service';
+import {SignService} from '../../services/sign.service';
 import {SignData} from '../../shared/interfaces';
 import {Router} from '@angular/router';
 import {CustomValidators} from '../../shared/custom.validators';

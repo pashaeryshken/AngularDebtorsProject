@@ -1,4 +1,10 @@
-<app-spinner *ngIf="debtorsLoading$| async"></app-spinner>
+<ng-container *ngIf="debtorsLoading$| async">
+  <div class="row justify-content-center mt-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  </div>
+</ng-container>
 
 <ng-container *ngIf="!(debtorsLoading$| async)">
   <ng-container *ngIf="debtors.length; else notDebtors">
@@ -9,7 +15,7 @@
 
   <ng-template #notDebtors>
     <div class="alert alert-primary" role="alert">
-      Список пуст,
+      У вас нет долгов,
       <a (click)="showModal($event)" class="alert-link">
         нажмите здесь для добавления
       </a>

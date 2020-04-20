@@ -5,11 +5,11 @@ import {Observable} from 'rxjs';
 import {
   AddDebtorAction,
   DebtorsActionTypes,
-  RemoveDebtorsAction, SetNewDebtorAction,
-  SetDebtorsAction, SuccessUpdateDebtorsAction, SuccessUpdateStatusDebtorsAction, UpdateDebtorsAction, UpdateStatusDebtorsAction
+  RemoveDebtorsAction, SetDebtorAction,
+  SetDebtorsAction, UpdateDebtorsAction
 } from '../actions/debtors.action';
-import {catchError, switchMap, tap} from 'rxjs/operators';
-import {DebtorsResponse, UpdateStatusDebtor} from '../../../shared/interfaces';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {DebtorsResponse, UpdateDebtor} from '../../../shared/interfaces';
 
 @Injectable({providedIn: 'root'})
 export class DebtorsEffects {
@@ -18,7 +18,7 @@ export class DebtorsEffects {
   }
 
   @Effect()
-  public getDebtors$: Observable<SetNewDebtorAction> = this.actions$.pipe(
+  public getDebtors$: Observable<DebtorsResponse[]> = this.actions$.pipe(
     ofType(DebtorsActionTypes.GET_DEBTORS),
     switchMap(() => {
       return this.debtorsService.getDebtors();
@@ -46,60 +46,29 @@ export class DebtorsEffects {
   );
 
   @Effect()
-  public addDebtors$: Observable<SetNewDebtorAction> = this.actions$.pipe(
+  public addDebtors$: Observable<SetDebtorAction> = this.actions$.pipe(
     ofType(DebtorsActionTypes.ADD_DEBTOR),
     switchMap((action: AddDebtorAction) => {
       return this.debtorsService.setDebtor(action.debtor);
     }),
     switchMap((debtor: DebtorsResponse) => {
-      return [new SetNewDebtorAction(debtor)];
+      return [new SetDebtorAction(debtor)];
     })
   );
 
   @Effect({dispatch: false})
-  public setDebtor$: Observable<SetNewDebtorAction> = this.actions$.pipe(
+  public setDebtor$: Observable<SetDebtorAction> = this.actions$.pipe(
     ofType(DebtorsActionTypes.SET_DEBTOR),
-    tap((action: SetNewDebtorAction) => {
+    tap( (action: SetDebtorAction) => {
       console.log('set_debtor', action);
     })
   );
 
-  @Effect()
-  public updateDebtor$: Observable<DebtorsResponse> = this.actions$.pipe(
+  @Effect({dispatch: false})
+  public updateDebtor$: Observable<UpdateDebtor> = this.actions$.pipe(
     ofType(DebtorsActionTypes.UPDATE_DEBTOR),
-    switchMap((action: UpdateDebtorsAction) => {
-      return this.debtorsService.UpdateDebtor(action.debtor);
-    }),
-    switchMap((debtor: DebtorsResponse) => {
-      return [new SuccessUpdateDebtorsAction(debtor)];
-    }),
-    catchError(() => [])
-  );
-
-  @Effect({dispatch: false})
-  public successUpdateDebtor$: Observable<SuccessUpdateDebtorsAction> = this.actions$.pipe(
-    ofType(DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR),
-    tap((action: SuccessUpdateDebtorsAction) => {
-      console.log('Set', action);
-    })
-  );
-
-  @Effect({})
-  public updateStatusDebtor$: Observable<SuccessUpdateStatusDebtorsAction> = this.actions$.pipe(
-    ofType(DebtorsActionTypes.UPDATE_DEBTOR_STATUS),
-    switchMap((action: UpdateStatusDebtorsAction) => {
-      return this.debtorsService.updateStatus(action.statusBody);
-    }),
-    switchMap((status: UpdateStatusDebtor) => {
-      return [new SuccessUpdateStatusDebtorsAction(status)];
-    })
-  );
-
-  @Effect({dispatch: false})
-  public successUpdateStatusDebtor$: Observable<SuccessUpdateStatusDebtorsAction> = this.actions$.pipe(
-    ofType(DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR_STATUS),
-    tap((status: SuccessUpdateStatusDebtorsAction) => {
-
+    switchMap( (action: UpdateDebtorsAction) => {
+        return this.debtorsService.UpdateDebtor(action.debtor).pipe();
     })
   );
 }

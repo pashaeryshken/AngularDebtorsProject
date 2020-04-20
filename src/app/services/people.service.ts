@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {People} from '../shared/interfaces';
+import {DebtorsResponse, People} from '../shared/interfaces';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
+import {DebtorsService} from './debtors.service';
 
 @Injectable({providedIn: 'root'})
 export class PeopleService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private debtorsService: DebtorsService) {
   }
 
   public getPeople(): Observable<People[]> {
@@ -17,16 +19,8 @@ export class PeopleService {
     });
   }
 
-  public createPeople(people: FormData): Observable<People> {
+  public createPeople(people: People | FormData): Observable<People> {
     return this.http.post<People>(`${environment.http}/people/`, people, {
-      headers: {
-        token: localStorage.getItem('token')
-      }
-    });
-  }
-
-  public updatePeople(people: FormData): Observable<People> {
-    return this.http.put<People>(`${environment.http}/people/`, people, {
       headers: {
         token: localStorage.getItem('token')
       }
@@ -39,5 +33,17 @@ export class PeopleService {
         token: localStorage.getItem('token')
       }
     });
+  }
+
+  public addPeoplesAndDebtors(people: People | FormData, debtor: DebtorsResponse): Observable<DebtorsResponse> {
+    return this.http.post<People>(`${environment.http}/people/`, people, {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    }).pipe(
+      switchMap((item: People) => {
+        return this.debtorsService.setDebtor({...debtor, peopleId: item._id});
+      })
+    );
   }
 }

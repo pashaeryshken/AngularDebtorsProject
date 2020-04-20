@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {DebtorsResponse, UpdateStatusDebtor} from '../../../shared/interfaces';
+import {DebtorsResponse, UpdateDebtor} from '../../../shared/interfaces';
 
 export enum DebtorsActionTypes {
   GET_DEBTORS = 'GET_DEBTORS',
@@ -7,10 +7,7 @@ export enum DebtorsActionTypes {
   SET_DEBTOR = 'SET_DEBTOR',
   REMOVE_DEBTORS = 'REMOVE_DEBTORS',
   ADD_DEBTOR = 'ADD_DEBTOR',
-  UPDATE_DEBTOR = 'UPDATE_DEBTOR',
-  SUCCESS_UPDATE_DEBTOR = 'SUCCESS_UPDATE_DEBTOR',
-  UPDATE_DEBTOR_STATUS = 'UPDATE_DEBTOR_STATUS',
-  SUCCESS_UPDATE_DEBTOR_STATUS = 'SUCCESS_UPDATE_DEBTOR_STATUS',
+  UPDATE_DEBTOR = 'UPDATE_DEBTOR'
 }
 
 export class GetDebtorsAction implements Action {
@@ -31,7 +28,7 @@ export class AddDebtorAction implements Action {
   }
 }
 
-export class SetNewDebtorAction implements Action {
+export class SetDebtorAction implements Action {
   public type: DebtorsActionTypes.SET_DEBTOR = DebtorsActionTypes.SET_DEBTOR;
 
   constructor(public debtor: DebtorsResponse) {
@@ -47,36 +44,13 @@ export class RemoveDebtorsAction implements Action {
 
 export class UpdateDebtorsAction implements Action {
   public type: DebtorsActionTypes.UPDATE_DEBTOR = DebtorsActionTypes.UPDATE_DEBTOR;
-
-  constructor(public debtor: DebtorsResponse) {
-  }
-}
-
-export class SuccessUpdateDebtorsAction implements Action {
-  public type: DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR = DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR;
-
-  constructor(public debtor: DebtorsResponse) {
-  }
-}
-
-export class UpdateStatusDebtorsAction implements Action {
-  public type: DebtorsActionTypes.UPDATE_DEBTOR_STATUS = DebtorsActionTypes.UPDATE_DEBTOR_STATUS;
-  constructor(public statusBody: UpdateStatusDebtor) {
-  }
-}
-
-export class SuccessUpdateStatusDebtorsAction implements Action {
-  public type: DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR_STATUS = DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR_STATUS;
-  constructor(public status: UpdateStatusDebtor) {
+  constructor(public debtor: UpdateDebtor) {
   }
 }
 
 export type DebtorsAction = GetDebtorsAction
-  | SetDebtorsAction
-  | AddDebtorAction
-  | RemoveDebtorsAction
-  | SetNewDebtorAction
-  | UpdateDebtorsAction
-  | SuccessUpdateDebtorsAction
-  | UpdateStatusDebtorsAction
-  | SuccessUpdateStatusDebtorsAction;
+                          | SetDebtorsAction
+                          | AddDebtorAction
+                          | RemoveDebtorsAction
+                          | SetDebtorAction
+                          | UpdateDebtorsAction;

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth/auth.service';
+import {AuthService} from '../../services/auth.service';
 import {UserData} from '../../shared/interfaces';
 import {Router} from '@angular/router';
-import {SearchDebtorService} from '../../services/search/search-debtor.service';
+import {SearchService} from '../../services/search.service';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/store/state/app.state';
 import {GetUsersAction} from '../../core/store/actions/user.action';
@@ -23,7 +23,7 @@ export class UserInfoPageComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router,
-              private searchService: SearchDebtorService,
+              private searchService: SearchService,
               private store: Store<AppState>) {}
 
   public ngOnInit(): void {

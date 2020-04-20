@@ -1,8 +1,10 @@
 import {Component, ElementRef, Injector, OnInit, ViewChild} from '@angular/core';
-import {SearchDebtorService} from '../../../services/search/search-debtor.service';
+import {SearchService} from '../../../services/search.service';
+import {createCustomElement, NgElement, NgElementConstructor} from '@angular/elements';
 import {Router} from '@angular/router';
-import {PopupShowService} from '../../../services/popupShow.service';
-import {SearchPeopleService} from '../../../services/search/search-people.service';
+import {ModalShowService} from '../../../services/modalShow.service';
+import {ModalComponent} from '../../../shared/components/modal/modal.component';
+
 @Component({
   selector: 'app-navbar-layout',
   templateUrl: './navbar.component.html',
@@ -12,25 +14,32 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('input') public input: ElementRef;
 
-  constructor(public searchDebtService: SearchDebtorService,
+  constructor(public searchService: SearchService,
               public router: Router,
-              public modalShowService: PopupShowService,
-              public searchPeopleService: SearchPeopleService) {}
+              public modalShowService: ModalShowService,
+              public injector: Injector,
+  ){
+
+    const POPUP_ELEMENT: NgElementConstructor<ModalComponent> = createCustomElement(ModalComponent, {injector});
+    if (!customElements.get('app-modal-component')) {
+      customElements.define('app-modal-component', POPUP_ELEMENT);
+    }
+  }
 
   public ngOnInit(): void {
   }
 
   public openSearch(event: Event): void {
     event.preventDefault();
-    this.searchDebtService.isSearch = !this.searchDebtService.isSearch;
+    this.searchService.isSearch = !this.searchService.isSearch;
   }
 
   public closeSearch(): void {
     setTimeout(() => {
-      if (this.searchDebtService.isSearch) {
-        this.searchDebtService.isSearch = false;
-        this.searchDebtService.searchStr = '';
-        this.searchDebtService.searchFilter = 'all';
+      if (this.searchService.isSearch) {
+        this.searchService.isSearch = false;
+        this.searchService.searchStr = '';
+        this.searchService.searchFilter = 'all';
         this.input.nativeElement.blur();
       }
     });

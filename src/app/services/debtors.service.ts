@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {DebtorsResponse, UpdateStatusDebtor} from '../shared/interfaces';
+import {DebtorsResponse, UpdateDebtor} from '../shared/interfaces';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -30,8 +30,8 @@ export class DebtorsService {
     });
   }
 
-  public UpdateDebtor(debtor: DebtorsResponse): Observable<DebtorsResponse> {
-    return this.http.put<DebtorsResponse>(`${environment.http}/debtors/`, debtor, {
+  public UpdateDebtor(debtor: UpdateDebtor): Observable<UpdateDebtor> {
+    return this.http.put<UpdateDebtor>(`${environment.http}/debtors/`, debtor, {
       headers: {
         token: localStorage.getItem('token')
       }
@@ -46,16 +46,8 @@ export class DebtorsService {
     });
   }
 
-  public getDebtor(id: string): Observable<DebtorsResponse> {
+  public getDebtor(id: number): Observable<DebtorsResponse> {
     return this.http.get<DebtorsResponse>(`${environment.http}/debtors/${id}`, {
-      headers: {
-        token: localStorage.getItem('token')
-      }
-    });
-  }
-
-  public updateStatus(updateBody: UpdateStatusDebtor): Observable<UpdateStatusDebtor> {
-    return this.http.put<UpdateStatusDebtor>(`${environment.http}/debtors/status`, updateBody, {
       headers: {
         token: localStorage.getItem('token')
       }

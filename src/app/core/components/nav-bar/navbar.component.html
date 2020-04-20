@@ -1,5 +1,5 @@
 <div class="card mb-2 transform"
-     [ngClass]="{'transform-search' : searchDebtService.isSearch}"
+     [ngClass]="{'transform-search' : searchService.isSearch}"
      style="max-width: 700px;">
   <div class="flex-row">
     <ul class="nav ">
@@ -7,47 +7,34 @@
         <a class="nav-link" routerLinkActive="active" (click)="closeSearch()" routerLink="/user-info">Инфо</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="closeSearch()" routerLinkActive="active" routerLink="/peoples">Люди</a>
+        <a class="nav-link" (click)="closeSearch()" routerLink="/peoples">Люди</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLinkActive="active" routerLink="/debtors">Долги</a>
       </li>
 
     </ul>
-
     <ul class="nav">
-      <li class="nav-item ">
-        <a class="nav-link" (click)="modalShowService.showPopupEditPeople()">
-          <i class="fas fa-user-plus"></i>
+
+    </ul>
+    <ul class="nav" [ngClass]="{'nav-close' : !(router.url === '/debtors')}">
+      <li class="nav-item">
+        <a class="nav-link"  (click)="modalShowService.showAsComponent()">
+          <i class="fas fa-plus"></i>
+          Добавить
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" (click)="modalShowService.showAsComponent()">
-          <i class="fas fa-address-card"></i>
-        </a>
-      </li>
-    </ul>
-    <ul class="nav" *ngIf="router.url === '/debtors'">
       <li class="nav-item">
         <input class="form-control mr-sm-2 search"
-               [(ngModel)]="searchDebtService.searchStr" type="search"
+               [(ngModel)]="searchService.searchStr" type="search"
                #input
                placeholder="Поиск..." aria-label="Поиск">
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)="openSearch($event)">
-          <i class="fas fa-chevron-down" [ngClass]="{'rotate': searchDebtService.isSearch }"></i>
+          <i class="fas fa-chevron-down" [ngClass]="{'rotate': searchService.isSearch }"></i>
         </a>
-      </li>
-    </ul>
-
-    <ul class="nav" *ngIf="router.url === '/peoples'">
-      <li class="nav-item">
-        <input class="form-control mr-sm-2 search"
-               [(ngModel)]="searchPeopleService.searchStr" type="search"
-               #input
-               placeholder="Поиск..." aria-label="Поиск">
       </li>
     </ul>
   </div>
@@ -57,29 +44,32 @@
       <div class="btn-group btn-group-sm btn-group-toggle col-md-12" data-toggle="buttons">
         <label
           class="btn btn-outline-secondary"
-          [ngClass]="{active: searchDebtService.search.filter === 'all'}"
+          [ngClass]="{active: searchService.search.filter === 'all'}"
         >
           <input type="radio" name="isI" id="option1" value="all"
 
-                 [(ngModel)]="searchDebtService.searchFilter"> Все
+                 [(ngModel)]="searchService.searchFilter"> Все
         </label>
         <label
           class="btn btn-outline-secondary"
-          [ngClass]="{active: searchDebtService.search.filter === 'false'}"
+          [ngClass]="{active: searchService.search.filter === 'false'}"
         >
           <input type="radio" name="isI" id="option2" value="false"
-                 [(ngModel)]="searchDebtService.searchFilter">Мне должны
+                 [(ngModel)]="searchService.searchFilter">Мне должны
         </label>
         <label
           class="btn btn-outline-secondary"
-          [ngClass]="{active: searchDebtService.search.filter === 'true'}"
+          [ngClass]="{active: searchService.search.filter === 'true'}"
         >
           <input type="radio" name="isI" id="option3" value="true"
-                 [(ngModel)]="searchDebtService.searchFilter">Я должен
+                 [(ngModel)]="searchService.searchFilter">Я должен
         </label>
       </div>
     </div>
   </div>
 </div>
 
+
+
 <router-outlet></router-outlet>
+
