@@ -7,45 +7,33 @@ import {RouterModule} from '@angular/router';
 import {DragAndDropDirective} from './directives/drag-and-drop/drag-and-drop.directive';
 import {CircleDiagramComponent} from '../features/user-info-page/circle-deagram/circle-diagram.component';
 import {RemoveBtnDirective} from './directives/remove-btn/remove-btn.directive';
-import {RemoveBtnComponent} from './components/button-components/remove-btn/remove-btn.component';
-import {DropdownPeopleListComponent} from './components/dropdown-people-list/dropdown-people-list.component';
-import {CreatePeopleFormComponent} from './components/form-components/create-people-form/create-people-form.component';
-import {CardPeopleComponent} from './components/card-people/card-people.component';
+import {ModalComponent} from './components/modal/modal.component';
+import {RemoveBtnDebtorComponent} from './components/remove-btn-debtor/remove-btn-debtor.component';
+import {DropdownPeopleListComponent} from './components/modal/dropdown-people-list/dropdown-people-list.component';
+import {CreatePeopleFormComponent} from './components/modal/create-people-form/create-people-form.component';
+import {PeopleCardComponent} from './components/people-card/people-card.component';
 import {PhoneMaskDirective} from './directives/phone-mask/phone-mask.directive';
 import {IConfig, NgxMaskModule} from 'ngx-mask';
-import {EditBtnComponent} from './components/button-components/edit-btn/edit-btn.component';
-import {CreateDebtorFormComponent} from './components/form-components/create-debtor-form/create-debtor-form.component';
-import {SpinnerComponent} from './components/spinner/spinner.component';
-import {SearchPeoplePipe} from './pipes/search-people.pipe';
-import {PopupCreateDebtorComponent} from './components/popup-components/popup-create-debtor/popup-create-debtor.component';
-import {ExpiredDateDirective} from './directives/expired-date/expired-date.directive';
-import { TableHistoryDebtComponent } from './components/table-history-debt/table-history-debt.component';
-import { PopupHistoryDeptComponent } from './components/popup-components/popup-history-dept/popup-history-dept.component';
-import { PopupCreatePeopleComponent } from './components/popup-components/popup-create-people/popup-create-people.component';
+import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
+import { CreateDebtorFormComponent } from './components/modal/create-debtor-form/create-debtor-form.component';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
   declarations: [
     SearchDebtorsPipe,
-    SearchPeoplePipe,
     NavbarComponent,
     DragAndDropDirective,
     CircleDiagramComponent,
     RemoveBtnDirective,
-    PopupCreateDebtorComponent,
-    RemoveBtnComponent,
+    ModalComponent,
+    RemoveBtnDebtorComponent,
     DropdownPeopleListComponent,
-    ExpiredDateDirective,
     CreatePeopleFormComponent,
-    CardPeopleComponent,
+    PeopleCardComponent,
     PhoneMaskDirective,
     EditBtnComponent,
-    CreateDebtorFormComponent,
-    SpinnerComponent,
-    TableHistoryDebtComponent,
-    PopupHistoryDeptComponent,
-    PopupCreatePeopleComponent
+    CreateDebtorFormComponent
   ],
   imports: [
     CommonModule,
@@ -54,21 +42,17 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     ReactiveFormsModule,
     NgxMaskModule.forRoot(options)
   ],
-    exports: [
-        SearchDebtorsPipe,
-        SearchPeoplePipe,
-        NavbarComponent,
-        DragAndDropDirective,
-        CircleDiagramComponent,
-        RemoveBtnDirective,
-        ExpiredDateDirective,
-        PopupCreateDebtorComponent,
-        RemoveBtnComponent,
-        CardPeopleComponent,
-        EditBtnComponent,
-        SpinnerComponent,
-        TableHistoryDebtComponent
-    ],
+  exports: [
+    SearchDebtorsPipe,
+    NavbarComponent,
+    DragAndDropDirective,
+    CircleDiagramComponent,
+    RemoveBtnDirective,
+    ModalComponent,
+    RemoveBtnDebtorComponent,
+    PeopleCardComponent,
+    EditBtnComponent
+  ],
   providers: [DatePipe]
 })
 

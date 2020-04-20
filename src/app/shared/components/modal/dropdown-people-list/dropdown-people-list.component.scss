@@ -11,8 +11,9 @@
 }
 
 .dropdown-menu{
+  min-width: 100%;
   padding: 0;
-  height: 155px;
+  max-height: 155px;
   overflow: hidden;
   overflow-y: scroll;
   z-index: 15;
@@ -23,6 +24,11 @@
   align-items: center;
   cursor: pointer;
   width: 100%;
+
+
+  span{
+    font-size: 12px;
+  }
 }
 
 .people-title{
@@ -34,3 +40,23 @@
   background: rgba(0,0,0, 0);
   z-index: 10;
 }
+
+.input-search{
+  position: relative;
+}
+
+.fas{
+  position: absolute;
+  cursor: pointer;
+  font-size: 15px;
+  top: 10px;
+  right: 10px;
+  color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+
+  &.fa-times{
+    right: 12px;
+  }
+}
+
+

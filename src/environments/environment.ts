@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  http: 'http://localhost:4000',
-  googleKey: '387013174542-u7fbt5ai853tmbgt5ijiee5f7e938776.apps.googleusercontent.com'
+  http: 'http://localhost:4000'
 };
 
 /*

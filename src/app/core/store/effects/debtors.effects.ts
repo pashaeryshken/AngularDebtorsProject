@@ -6,7 +6,11 @@ import {
   AddDebtorAction,
   DebtorsActionTypes,
   RemoveDebtorsAction, SetDebtorAction,
+<<<<<<< HEAD
   SetDebtorsAction, UpdateDebtorsAction
+=======
+  SetDebtorsAction, SuccessUpdateDebtorsAction, UpdateDebtorsAction
+>>>>>>> Revert "finaly commit"
 } from '../actions/debtors.action';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {DebtorsResponse, UpdateDebtor} from '../../../shared/interfaces';
@@ -59,16 +63,27 @@ export class DebtorsEffects {
   @Effect({dispatch: false})
   public setDebtor$: Observable<SetDebtorAction> = this.actions$.pipe(
     ofType(DebtorsActionTypes.SET_DEBTOR),
+<<<<<<< HEAD
     tap( (action: SetDebtorAction) => {
+=======
+    tap((action: SetDebtorAction) => {
+>>>>>>> Revert "finaly commit"
       console.log('set_debtor', action);
     })
   );
 
   @Effect({dispatch: false})
+<<<<<<< HEAD
   public updateDebtor$: Observable<UpdateDebtor> = this.actions$.pipe(
     ofType(DebtorsActionTypes.UPDATE_DEBTOR),
     switchMap( (action: UpdateDebtorsAction) => {
         return this.debtorsService.UpdateDebtor(action.debtor).pipe();
+=======
+  public successUpdateDebtor$: Observable<SuccessUpdateDebtorsAction> = this.actions$.pipe(
+    ofType(DebtorsActionTypes.SUCCESS_UPDATE_DEBTOR),
+    tap((action: SuccessUpdateDebtorsAction) => {
+      console.log('Set', action);
+>>>>>>> Revert "finaly commit"
     })
   );
 }

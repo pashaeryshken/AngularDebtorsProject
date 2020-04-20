@@ -5,15 +5,32 @@ import {GetPeopleAction} from '../../../../core/store/actions/people.action';
 import {People} from '../../../interfaces';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+<<<<<<< HEAD
+=======
+import {animate, style, transition, trigger} from '@angular/animations';
+>>>>>>> Revert "finaly commit"
 
 @Component({
   selector: 'app-dropdown-people-list',
   templateUrl: './dropdown-people-list.component.html',
+<<<<<<< HEAD
   styleUrls: ['./dropdown-people-list.component.scss']
 })
 export class DropdownPeopleListComponent implements OnInit {
 
   @Output() public setPeopleId: EventEmitter<string> = new EventEmitter<string>();
+=======
+  styleUrls: ['./dropdown-people-list.component.scss'],
+  animations: [
+    trigger('opacity', [
+      transition(':enter', [style({opacity: '0'}), animate(150)])
+    ])
+  ]
+})
+export class DropdownPeopleListComponent implements OnInit {
+
+  @Output() public setPeopleId: EventEmitter<People> = new EventEmitter<People>();
+>>>>>>> Revert "finaly commit"
 
   public isShowDropdown: boolean = false;
   public peoples: People[] = null;
@@ -39,8 +56,13 @@ export class DropdownPeopleListComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   public emitPeopleId(id: string): void {
     this.setPeopleId.emit(id);
+=======
+  public emitPeopleId(people: People): void {
+    this.setPeopleId.emit(people);
+>>>>>>> Revert "finaly commit"
     this.isShowDropdown = false;
   }
 

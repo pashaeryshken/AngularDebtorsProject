@@ -35,9 +35,15 @@ export const debtorsReducer: ActionReducer<DebtorsState> =
               return updateDebtor;
             }
             return debtor;
+<<<<<<< HEAD
           })};
       }
 
+=======
+          }), debtorUpdate: false
+        };
+      }
+>>>>>>> Revert "finaly commit"
       default:
         return state;
     }
