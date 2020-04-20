@@ -1,4 +1,4 @@
-import {Directive, EventEmitter, HostBinding, HostListener, Input, Output} from '@angular/core';
+import {Directive, EventEmitter, HostBinding, HostListener, Output} from '@angular/core';
 
 @Directive({
   selector: '[appDragAndDrop]'
@@ -6,7 +6,6 @@ import {Directive, EventEmitter, HostBinding, HostListener, Input, Output} from 
 export class DragAndDropDirective {
 
   @Output() public onFileDropped: EventEmitter<FileList> = new EventEmitter<FileList>();
-  @Input('validFile') public valid: boolean;
 
   @HostBinding('style.background-color') private background: string = '#f5fcff';
 
@@ -21,7 +20,7 @@ export class DragAndDropDirective {
   public onDragLeave(evt: Event): void {
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = '#f5fcff' ;
+    this.background = '#f5fcff';
   }
 
   @HostListener('drop', ['$event'])

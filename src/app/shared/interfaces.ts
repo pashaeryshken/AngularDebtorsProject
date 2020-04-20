@@ -16,8 +16,13 @@ export interface SignData {
 
 export interface DebtorsResponse {
   people: People;
+<<<<<<< HEAD
   dateStart: Date;
   dateEnd: Date;
+=======
+  date: Date;
+  dateOfPayment: Date;
+>>>>>>> master
   status: number;
   currency: string;
   _id?: string;
@@ -27,8 +32,13 @@ export interface DebtorsResponse {
 }
 
 export interface UpdateDebtor {
+<<<<<<< HEAD
   dateStart?: Date;
   dateEnd?: Date;
+=======
+  date?: Date;
+  dateOfPayment?: Date;
+>>>>>>> master
   status?: number;
   currency?: string;
   id: string;

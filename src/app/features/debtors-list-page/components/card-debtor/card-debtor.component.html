@@ -14,7 +14,11 @@
         </p>
         <p class="card-text">
           <small class="text-muted">
+<<<<<<< HEAD:src/app/features/debtors-list-page/components/card-debtor/card-debtor.component.html
             Дата возврата: {{debtor.dateEnd | date:'dd MMM yyyy'}}
+=======
+            Дата возврата: {{debtor.dateOfPayment | date:'dd MMM yyyy'}}
+>>>>>>> master:src/app/shared/components/card-debtor/card-debtor.component.html
           </small>
         </p>
       </div>
@@ -34,7 +38,11 @@
         Вернули
       </button>
       <app-remove-btn-debtor className="mt-2" [id]="debtor._id" (remove)="debtorRemove(debtor._id)"></app-remove-btn-debtor>
+<<<<<<< HEAD:src/app/features/debtors-list-page/components/card-debtor/card-debtor.component.html
       <app-edit-btn [debtor]="debtor"></app-edit-btn>
+=======
+      <div class="btn btn-secondary mt-2">Редактировать</div>
+>>>>>>> master:src/app/shared/components/card-debtor/card-debtor.component.html
     </div>
   </div>
 </div>

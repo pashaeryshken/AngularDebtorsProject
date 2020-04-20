@@ -30,8 +30,8 @@ export class DebtorsService {
     });
   }
 
-  public UpdateDebtor(debtor: DebtorsResponse): Observable<DebtorsResponse> {
-    return this.http.put<DebtorsResponse>(`${environment.http}/debtors/`, debtor, {
+  public UpdateDebtor(debtor: UpdateDebtor): Observable<UpdateDebtor> {
+    return this.http.put<UpdateDebtor>(`${environment.http}/debtors/`, debtor, {
       headers: {
         token: localStorage.getItem('token')
       }

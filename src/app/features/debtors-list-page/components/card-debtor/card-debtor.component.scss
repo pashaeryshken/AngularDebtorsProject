@@ -30,6 +30,13 @@ img{
   padding: 0;
 }
 
+.center{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .text-block{
   background-color: #007bff;
   margin-bottom: 0;

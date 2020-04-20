@@ -1,4 +1,5 @@
 <div class="dropdown mb-3">
+<<<<<<< HEAD
   <div class="input-search">
     <input type="text" class="form-control form-control-sm input-select" id="exampleInputEmail1"
            placeholder="Выбрать из списка..."
@@ -11,16 +12,30 @@
        *ngIf="!isShowDropdown"
        (click)="showDropdown()" @opacity></i>
   </div>
+=======
+  <input type="text" class="form-control form-control-sm" id="exampleInputEmail1"
+         placeholder="Выбрать из списка..."
+         aria-describedby="emailHelp" (focus)="showDropdown()" >
+>>>>>>> master
   <div [ngClass]="{'modal-backdrop': isShowDropdown}" (click)="showDropdown()"></div>
   <div class="dropdown-menu" [ngClass]="{'show': isShowDropdown && peoples}">
     <div class="dropdown-item col-md-12"
          *ngFor="let people of peoples"
+<<<<<<< HEAD
          (click)="emitPeopleId(people)"
     >
       <div class="img-people">
         <img [src]="people.avatar || '../../../../../assets/images.png'" alt="">
       </div>
       <p class="people-title">{{people.name}} <span class="text-muted">({{people.email}})</span></p>
+=======
+         (click)="emitPeopleId(people._id)"
+         >
+      <div class="img-people">
+        <img [src]="people.avatar" alt="" >
+      </div>
+      <p class="people-title">{{people.name}}</p>
+>>>>>>> master
     </div>
   </div>
 </div>

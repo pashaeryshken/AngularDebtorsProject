@@ -5,11 +5,15 @@ import {GetPeopleAction} from '../../../../core/store/actions/people.action';
 import {People} from '../../../interfaces';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+<<<<<<< HEAD
 import {animate, style, transition, trigger} from '@angular/animations';
+=======
+>>>>>>> master
 
 @Component({
   selector: 'app-dropdown-people-list',
   templateUrl: './dropdown-people-list.component.html',
+<<<<<<< HEAD
   styleUrls: ['./dropdown-people-list.component.scss'],
   animations: [
     trigger('opacity', [
@@ -20,6 +24,13 @@ import {animate, style, transition, trigger} from '@angular/animations';
 export class DropdownPeopleListComponent implements OnInit {
 
   @Output() public setPeopleId: EventEmitter<People> = new EventEmitter<People>();
+=======
+  styleUrls: ['./dropdown-people-list.component.scss']
+})
+export class DropdownPeopleListComponent implements OnInit {
+
+  @Output() public setPeopleId: EventEmitter<string> = new EventEmitter<string>();
+>>>>>>> master
 
   public isShowDropdown: boolean = false;
   public peoples: People[] = null;
@@ -45,8 +56,13 @@ export class DropdownPeopleListComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   public emitPeopleId(people: People): void {
     this.setPeopleId.emit(people);
+=======
+  public emitPeopleId(id: string): void {
+    this.setPeopleId.emit(id);
+>>>>>>> master
     this.isShowDropdown = false;
   }
 
