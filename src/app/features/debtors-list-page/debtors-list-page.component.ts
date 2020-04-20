@@ -1,16 +1,14 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
-import {DebtorsService} from '../../services/debtors.service';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {DebtorsResponse} from '../../shared/interfaces';
 import {Observable, Subject} from 'rxjs';
-import {SearchService} from '../../services/search.service';
+import {SearchDebtorService} from '../../services/search/search-debtor.service';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/store/state/app.state';
-import {GetDebtorsAction, RemoveDebtorsAction, UpdateDebtorsAction} from '../../core/store/actions/debtors.action';
+import {GetDebtorsAction} from '../../core/store/actions/debtors.action';
 import {map, takeUntil} from 'rxjs/operators';
 import {DebtorsState} from '../../core/store/state/debtors.state';
-import {ModalShowService} from '../../services/modalShow.service';
+import {PopupShowService} from '../../services/popupShow.service';
 
 @Component({
   selector: 'app-debtors-list-page',
@@ -25,10 +23,10 @@ export class DebtorsListPageComponent implements OnInit, OnDestroy {
   @Input() public searchStr: string;
 
   constructor(
-    public searchService: SearchService,
+    public searchService: SearchDebtorService,
     public router: Router,
     public store: Store<AppState>,
-    public modalShowService: ModalShowService
+    public modalShowService: PopupShowService
   ) {
   }
 
@@ -51,6 +49,7 @@ export class DebtorsListPageComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.destroy$.next();
+    this.searchService.clear();
   }
 
   public showModal(event: Event): void {

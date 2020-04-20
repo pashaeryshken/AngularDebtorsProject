@@ -1,0 +1,68 @@
+<div
+  class="modal fade show bd-example-modal-sm"
+  id="exampleModal"
+  style="display: block"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-modal="true"
+>
+  <div class="modal-backdrop" (click)="closePopup()"></div>
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header pt-2 pb-2">
+        <h5 class="modal-title">Возрврат</h5>
+      </div>
+      <div class="modal-body" [formGroup]="historyForm">
+        <label for="date">Дата:</label>
+        <input type="date" id="date" class="form-control" formControlName="date">
+        <div class="error-block col-md-12">
+          <div
+            *ngIf="historyForm.get('date').errors && historyForm.get('date').touched"
+            class="alert-light pl-1 text-center"
+          >
+            <small *ngIf="historyForm.get('date').errors.invalidDate">
+              Дата возврата не может быть меньше даты начала.
+            </small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <label for="total">Введите сумму:</label>
+            <input type="number" id="total" class="form-control" formControlName="total">
+          </div>
+          <div class="col-md-4 pl-0">
+            <label for="currency">Валюта:</label>
+            <select name="" id="currency" class="custom-select" formControlName="currency">
+              <option value="BYN">BYN</option>
+            </select>
+          </div>
+        </div>
+        <div class="error-block">
+          <div
+            *ngIf="historyForm.get('total').errors && historyForm.get('total').touched"
+            class="alert-light pl-1"
+          >
+            <small *ngIf="historyForm.get('total').errors.required">
+              Поле пусто
+            </small>
+            <small *ngIf="historyForm.get('total').errors.min">Сумма не
+              меньше {{historyForm.get('total').errors.min.min}}</small>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer center">
+        <div class="row">
+          <button type="button" class="btn btn-secondary mr-2" (click)="closePopup()">Отмена</button>
+          <button type="button"
+                  class="btn btn-primary ml-2"
+                  [disabled]="!historyForm.valid"
+                  (click)="submit()">Сохранить</button>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>

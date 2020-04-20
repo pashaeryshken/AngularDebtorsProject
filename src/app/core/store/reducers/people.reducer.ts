@@ -18,7 +18,7 @@ export const peopleReducer: ActionReducer<PeopleState> =
         return {...state, peoples: [...state.peoples, action.people], newId: action.people._id};
       }
       case PeopleActionTypes.REMOVE_PEOPLE: {
-        return {...state, peoples: [...state.peoples].filter( (people) => people._id === action.id)};
+        return {...state, peoples: [...state.peoples].filter( (people) => people._id !== action.id)};
       }
 
       default: return state;

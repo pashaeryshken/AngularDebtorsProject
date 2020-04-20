@@ -1,0 +1,12 @@
+<div class="remove-btn" [ngClass]="className">
+  <button
+    type="button"
+    class="btn btn-danger position-absolute"
+    appRemoveBtn
+  >
+    Удалить
+  </button>
+  <button type="button" class="btn btn-outline-secondary" (click)="removeDebtor()">
+    ОК
+  </button>
+</div>

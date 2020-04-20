@@ -23,7 +23,7 @@ export class SetPeoplesAction implements Action {
 export class AddPeopleAction implements Action {
   public type: PeopleActionTypes.ADD_PEOPLE = PeopleActionTypes.ADD_PEOPLE;
 
-  constructor(public people: People | FormData) {
+  constructor(public people: FormData) {
   }
 }
 export class SetPeopleAction implements Action {

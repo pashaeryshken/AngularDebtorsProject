@@ -16,52 +16,20 @@ export interface SignData {
 
 export interface DebtorsResponse {
   people: People;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  date: Date;
-  dateOfPayment: Date;
-=======
-  dateStart: Date;
-  dateEnd: Date;
->>>>>>> Revert "finaly commit"
-=======
-  dateStart: Date;
-  dateEnd: Date;
-=======
-  date: Date;
-  dateOfPayment: Date;
->>>>>>> master
->>>>>>> 96afeac285079c809edf307dc86a1d169306c273
+  dateStart: string;
+  dateEnd: string;
   status: number;
   currency: string;
   _id?: string;
   isI: boolean;
   amount: number;
   peopleId?: string;
+  history?: DebtHistory[];
 }
 
-export interface UpdateDebtor {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  date?: Date;
-  dateOfPayment?: Date;
-=======
-  dateStart?: Date;
-  dateEnd?: Date;
->>>>>>> Revert "finaly commit"
-=======
-  dateStart?: Date;
-  dateEnd?: Date;
-=======
-  date?: Date;
-  dateOfPayment?: Date;
->>>>>>> master
->>>>>>> 96afeac285079c809edf307dc86a1d169306c273
-  status?: number;
-  currency?: string;
+export interface UpdateStatusDebtor {
   id: string;
-  isI?: boolean;
-  amount?: number;
+  status: number;
 }
 
 export interface UserData {
@@ -84,4 +52,12 @@ export interface People {
   address: string;
   tNumber: string;
   avatar: string;
+}
+
+export interface DebtHistory {
+  _id?: string;
+  date?: string;
+  total: number;
+  currency: string;
+  status: number;
 }

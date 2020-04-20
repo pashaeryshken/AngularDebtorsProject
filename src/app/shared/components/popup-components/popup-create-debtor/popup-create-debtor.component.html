@@ -1,0 +1,51 @@
+<div
+  class="modal fade show"
+  id="exampleModal"
+  style="display: block"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-modal="true"
+  >
+  <div class="modal-backdrop" (click)="close()"></div>
+  <div class="container" role="document">
+    <div class="row justify-content-center align-items-center col-md-12">
+      <form class="col-md-10 mt-4 mb-4" [@formAnimation] = stateAnimation>
+
+        <app-dropdown-people-list [prevPeople]="people"
+                                  (editPerson)="editPerson($event)"
+                                  (close)="cancelEditablePeople()"
+        ></app-dropdown-people-list>
+
+
+        <app-create-people-form (validForm)="validPeopleForm($event)"
+                                (cancelEditablePeople)="cancelEditablePeople()"
+                                [editablePerson]="people"
+        ></app-create-people-form>
+
+
+        <app-create-debtor-form (validForm)="validDebtorForm($event)"
+                                [editableDebtor]="debtor"
+        ></app-create-debtor-form>
+
+
+        <div class="form-row">
+          <div class="col-md-6 ">
+            <button class="btn btn-primary col-md-12" type="submit" (click)="submit()"
+                    [disabled]="!((formPeopleValid || !!people) && formDebtorValid)"
+            >{{debtor ? 'Редактировать' : 'Добавить'}}</button>
+          </div>
+
+          <div class="col-md-3 mt-md-0 mt-sm-2">
+            <button class="btn btn-secondary col-md-12" type="submit" (click)="clear()">Очитсть</button>
+          </div>
+
+          <div class="col-md-3 mt-md-0 mt-sm-2">
+            <button class="btn btn-danger col-md-12" type="submit" (click)="close()">Отменить</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
